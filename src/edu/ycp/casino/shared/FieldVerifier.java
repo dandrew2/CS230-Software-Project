@@ -1,5 +1,7 @@
 package edu.ycp.casino.shared;
 
+// a comment
+
 /**
  * <p>
  * FieldVerifier validates that the name the user enters is valid.
