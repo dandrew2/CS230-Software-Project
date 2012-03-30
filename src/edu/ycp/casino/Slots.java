@@ -40,11 +40,10 @@ public class Slots extends Game {
 	public void spin(){
 		
 		Random rand = new Random(); 
+		int newNumber = rand.nextInt();
 		
 		for(int i = 0;i < 2;i++)
 		{
-			int newNumber = rand.nextInt();
-			
 			if(newNumber == 0)
 			{
 				slot[i] = SlotsSymbols.BAR;
