@@ -44,7 +44,8 @@ public class SlotsTest {
 	
 	@Test
 	public void getSlot() throws Exception {
-		game1 = new Slots(slot2);
+		game1 = new Slots();
+		game1.setSlot(slot2);
 		
 		assertSame(slot2,game1.getSlot());
 		assertNotSame(slot3,game1.getSlot());
@@ -54,7 +55,7 @@ public class SlotsTest {
 	
 	@Test
 	public void setSlot() throws Exception {
-		game1 = new Slots(slot1);
+		game1 = new Slots();
 		game1.setSlot(slot2);
 		
 		assertSame(slot2,game1.getSlot());
@@ -64,7 +65,8 @@ public class SlotsTest {
 
 	@Test
 	public void testSpin() throws Exception {
-		game1 = new Slots(slot1);
+		game1 = new Slots();
+		game1.setSlot(slot1);
 		
 		game1.spin();
 		
@@ -75,7 +77,7 @@ public class SlotsTest {
 
 	@Test
 	public void testCheckWin() throws Exception {
-		game1 = new Slots(slot1);
+		game1 = new Slots();
 		
 		game1.setSlot(slot3);
 		assertEquals(true,game1.checkWin());

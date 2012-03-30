@@ -5,9 +5,9 @@ public class Slots extends Game {
 	
 	private SlotsSymbols[] slot = new SlotsSymbols[3];
 	
-	public Slots(SlotsSymbols[] slot)
+	public Slots()
 	{
-		this.slot = slot;
+		this.slot = new SlotsSymbols[3];
 	}
 	
 	public SlotsSymbols[] getSlot(){
