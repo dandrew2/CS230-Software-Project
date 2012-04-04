@@ -1,4 +1,4 @@
-package edu.ycp.casino;
+package edu.ycp.casino.shared;
 
 public class User {
 	private UserInfo info;
