@@ -67,11 +67,7 @@ public class SlotsTest {
 	public void testSpin() throws Exception {
 		game1 = new Slots();
 		game1.setSlot(slot1);
-		
 		game1.spin();
-		
-		assertNotSame(game1.getSlot()[1],SlotsSymbols.BAR);
-		
 		
 	}
 
@@ -84,5 +80,6 @@ public class SlotsTest {
 		game1.setSlot(slot4);
 		assertEquals(false,game1.checkWin());
 	}
+	
 
 }

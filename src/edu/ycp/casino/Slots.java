@@ -8,6 +8,11 @@ public class Slots extends Game {
 	public Slots()
 	{
 		this.slot = new SlotsSymbols[3];
+		
+		for(int i = 0; i < 3; i++)
+		{
+			slot[i] = SlotsSymbols.BAR;
+		}
 	}
 	
 	public SlotsSymbols[] getSlot(){
@@ -36,61 +41,68 @@ public class Slots extends Game {
 		}
 	}
 	
-	
 	public void spin(){
 		
 		Random rand = new Random(); 
-		int newNumber = rand.nextInt();
-		
-		for(int i = 0;i < 2;i++)
+		int newNumber;
+
+	
+		for(int i = 0; i < 3; i++)
 		{
+			newNumber = rand.nextInt() % 9;
+			
 			if(newNumber == 0)
 			{
-				slot[i] = SlotsSymbols.BAR;
+				this.slot[i] = SlotsSymbols.BAR;
 			}
 			
 			if(newNumber == 1)
 			{
-				slot[i] = SlotsSymbols.BELL;
+				this.slot[i] = SlotsSymbols.BELL;
 			}
 			
 			if(newNumber == 2)
 			{
-				slot[i] = SlotsSymbols.CHERRY;
+				this.slot[i] = SlotsSymbols.CHERRY;
 			}
 			
 			if(newNumber == 3)
 			{
-				slot[i] = SlotsSymbols.GRAPES;
+				this.slot[i] = SlotsSymbols.GRAPES;
 			}
 			
 			if(newNumber == 4)
 			{
-				slot[i] = SlotsSymbols.LIME;
+				this.slot[i] = SlotsSymbols.LIME;
 			}
 			
 			if(newNumber == 5)
 			{
-				slot[i] = SlotsSymbols.ORANGE;
+				this.slot[i] = SlotsSymbols.ORANGE;
 			}
 			
 			if(newNumber == 6)
 			{
-				slot[i] = SlotsSymbols.PLUM;
+				this.slot[i] = SlotsSymbols.PLUM;
 			}
 			
 			if(newNumber == 7)
 			{
-				slot[i] = SlotsSymbols.SEVEN;
+				this.slot[i] = SlotsSymbols.SEVEN;
 			}	
 			
 			if(newNumber == 8)
 			{
-				slot[i] = SlotsSymbols.WATERMELON;
+				this.slot[i] = SlotsSymbols.WATERMELON;
 			}	
 						
 		}
 		
+	}
+	
+	public void printSlot()
+	{
+		System.out.println("Slot: " + this.slot[0].toString() + " " + this.slot[1].toString() + " " + this.slot[2].toString());
 	}
 
 }
