@@ -8,7 +8,6 @@ public class Roulette {
 	private static Random generator;
 	
 	
-	
 		public Roulette(){
 			for(int i = 0; i < 37; i++){
 				wheel[i] =  i; 
@@ -29,7 +28,9 @@ public class Roulette {
 		}
 	}
 	
-	//public void placeBet
+	public void placeBet(BetType b){
+		
+	}
 	
 	public Boolean checkWin(BetType b, int val){
 		Boolean win = false;
@@ -66,5 +67,7 @@ public class Roulette {
 	}
 	
 	
+	public void play(){
 		
+	}
 }
