@@ -1,7 +1,9 @@
 package edu.ycp.casino;
 import java.util.Random; 
+import java.util.Scanner;
 
 import edu.ycp.casino.shared.Game;
+import edu.ycp.casino.shared.Player;
 import edu.ycp.casino.shared.SlotsSymbols;
 
 public class Slots extends Game {
@@ -14,7 +16,7 @@ public class Slots extends Game {
 		
 		for(int i = 0; i < 3; i++) //Initialize slot
 		{
-			slot[i] = SlotsSymbols.BAR;
+			slot[i] = SlotsSymbols.WATERMELON;
 		}
 	}
 	
@@ -60,7 +62,7 @@ public class Slots extends Game {
 	
 		for(int i = 0; i < 3; i++)
 		{
-			newNumber = rand.nextInt() % 9;
+			newNumber = rand.nextInt(9);
 			
 			if(newNumber == 0)
 			{
@@ -111,6 +113,51 @@ public class Slots extends Game {
 		
 	}
 	
+	
+	public void play(Player p)
+	{
+		int bet;
+		boolean stillPlaying = true;
+		Scanner keyboard = new Scanner(System.in);
+		
+		while(stillPlaying == true)
+		{
+			System.out.println("How much would you like to bet?");
+		
+			bet = keyboard.nextInt();
+		
+			this.spin();
+			
+			this.printSlot();
+		
+			if(this.checkWin() == true)
+			{
+				p.setBalance(p.getBalance() + bet);
+				System.out.println("Congrats you won!");
+			}else
+			{
+				p.setBalance(p.getBalance() - bet);
+				System.out.println("You lost better luck next time.");
+			}
+			
+			System.out.println("You now have: " + p.getBalance());
+			
+			if(p.getBalance() <= 0)	//check player still has money.
+			{
+				System.out.println("You've gone broke.");
+				break;
+			}
+			
+			System.out.println("Would you like to keep playing (Press 1 to exit)?");
+			
+			if(keyboard.nextInt() == 1)
+			{
+				System.out.println("Thanks for playing");
+				stillPlaying = false;
+			}
+		
+		}
+	}
 	
 	//Method to print out slot to console.
 	public void printSlot()
