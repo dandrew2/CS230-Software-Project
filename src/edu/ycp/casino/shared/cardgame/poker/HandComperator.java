@@ -15,10 +15,10 @@ public class HandComperator {
 		ArrayList<Hand> playerHands=new ArrayList<Hand>();
 		//Look at all players
 		for(Player player : players){
-			//Get all of the player's possible hands
+			//Get each player's best hand
 			playerHands.add(getBestPossible(community,player));
 		}
-		//TODO:  Figure out how to return a player insted of a hand
+		//TODO:  Figure out how to return a player instead of a hand
 		return getBestHand(playerHands);
 	}
 	private ArrayList<Hand> getAllPossible(Hand community,Player player){
@@ -44,7 +44,7 @@ public class HandComperator {
 		return allPossible.get(0);
 	}
 	private Hand getBestHand(ArrayList<Hand> hands){
-		Collections.sort(hands);
-		return hands.get(0);
+		Hand bestHand=Collections.max(hands);
 	}
+	private
 }
