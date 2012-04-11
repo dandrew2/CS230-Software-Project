@@ -1,6 +1,9 @@
 package edu.ycp.casino;
 import java.util.Random; 
 
+import edu.ycp.casino.shared.Game;
+import edu.ycp.casino.shared.SlotsSymbols;
+
 public class Slots extends Game {
 	
 	private SlotsSymbols[] slot = new SlotsSymbols[3];
@@ -9,22 +12,28 @@ public class Slots extends Game {
 	{
 		this.slot = new SlotsSymbols[3];
 		
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < 3; i++) //Initialize slot
 		{
 			slot[i] = SlotsSymbols.BAR;
 		}
 	}
 	
+	
+	//Getter method
 	public SlotsSymbols[] getSlot(){
 		
 		return this.slot;
 	}
-
+	
+	
+	//Setter method
 	public void setSlot(SlotsSymbols[] slot){
 	
 	this.slot = slot;
 	}
 	
+	
+	//Check if every slot has same value.
 	public boolean checkWin(){
 		
 		if(slot[0].equals(slot[1]))
@@ -41,6 +50,8 @@ public class Slots extends Game {
 		}
 	}
 	
+	
+	//Method to assign random values to slot.
 	public void spin(){
 		
 		Random rand = new Random(); 
@@ -100,6 +111,8 @@ public class Slots extends Game {
 		
 	}
 	
+	
+	//Method to print out slot to console.
 	public void printSlot()
 	{
 		System.out.println("Slot: " + this.slot[0].toString() + " " + this.slot[1].toString() + " " + this.slot[2].toString());
