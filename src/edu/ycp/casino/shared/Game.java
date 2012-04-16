@@ -2,7 +2,7 @@ package edu.ycp.casino.shared;
 
 import java.util.ArrayList;
 
-public class Game extends Roulette {
+public class Game{
 	private int roomNumber; 
 	private ArrayList<Player> players;
 	private float pot; 
