@@ -8,9 +8,8 @@ import edu.ycp.casino.shared.cardgame.Card;
 import edu.ycp.casino.shared.cardgame.Hand;
 
 public class HandComperator {
-	public HandComperator(){
-		
-	}
+	public HandComperator(){}
+
 	public Player getWinner(Hand community,ArrayList<Player> players){
 		ArrayList<Hand> playerHands=new ArrayList<Hand>();
 		//Look at all players
@@ -19,8 +18,9 @@ public class HandComperator {
 			playerHands.add(getBestPossible(community,player));
 		}
 		//TODO:  Figure out how to return a player instead of a hand
-		return getBestHand(playerHands);
+		return getPlayerFromHand(players,getBestHand(playerHands));
 	}
+	//Find all combinations of the community cards and the player's hand.
 	private ArrayList<Hand> getAllPossible(Hand community,Player player){
 		//Be ready to look at all hand possibilities
 		ArrayList<Hand> allHands = new ArrayList<Hand>();
@@ -38,13 +38,24 @@ public class HandComperator {
 		}
 		return allHands;
 	}
+	//Get all possible hands, and return the best one.
 	private Hand getBestPossible(Hand community,Player player){
 		ArrayList<Hand> allPossible = getAllPossible(community,player);
 		Collections.sort(allPossible);
 		return allPossible.get(0);
 	}
+	//Get the best hand out of a list
 	private Hand getBestHand(ArrayList<Hand> hands){
-		Hand bestHand=Collections.max(hands);
+		return Collections.max(hands);
 	}
-	private
+	//This is unfortunately necessary, because the collections needs a collection of hands, not players.
+	//The hands must be set apart, organized, and then the player must be derived later.
+	private Player getPlayerFromHand(ArrayList<Player> players,Hand hand){
+		for(Player player : players){
+			if (player.getHand() == hand){
+				return player;
+			}
+		}
+		return null;
+	}
 }

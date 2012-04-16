@@ -21,7 +21,7 @@ public class Player extends User{
 	}
 	public int getBet() {
 		// TODO impliment a bet getter
-		return 0;
+		return 5;
 	}
 	public int getAnti(int anti) {
 		balance-=anti;
