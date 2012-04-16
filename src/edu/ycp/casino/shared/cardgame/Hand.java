@@ -196,6 +196,14 @@ public class Hand implements Comparable<Hand>{
     	}
     	return true;
     }
+    
+    public String toString(){
+    	String str="";
+    	for(Card card : this.cards){
+    		str+=card.toString()+" , ";
+    	}
+    	return str.substring(0,(str.length()-3));
+    }
 
 	@Override
 	public int compareTo(Hand other) {

@@ -22,9 +22,7 @@ public class Table {
 		community = new Hand();
 		dealer = new Dealer();
 		players = new ArrayList<Player>();
-		//Set up players
-		for (Player player : players)
-			this.players.add(player);
+		this.players=players;
 	}
 	
 	public void takeBets(){
@@ -50,10 +48,13 @@ public class Table {
 		takeBets();
 		dealer.dealRiver(this.community);
 		takeBets();
-		this.comperator.getWinner(this.community,this.players).addBalance(this.pot.takeAll());
+		getWinner().addBalance(this.pot.takeAll());
 	}
 	
-
+	public Player getWinner(){
+		return this.comperator.getWinner(this.community,this.players);
+	}
+	
 	public Dealer getDealer() {
 		return dealer;
 	}
