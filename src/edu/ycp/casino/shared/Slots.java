@@ -1,10 +1,7 @@
-package edu.ycp.casino;
+package edu.ycp.casino.shared;
 import java.util.Random; 
 import java.util.Scanner;
 
-import edu.ycp.casino.shared.Game;
-import edu.ycp.casino.shared.Player;
-import edu.ycp.casino.shared.SlotsSymbols;
 
 public class Slots extends Game {
 	
@@ -132,11 +129,12 @@ public class Slots extends Game {
 		
 			if(this.checkWin() == true)
 			{
-				p.setBalance(p.getBalance() + bet);
+				p.addBalance(bet);
 				System.out.println("Congrats you won!");
 			}else
 			{
-				p.setBalance(p.getBalance() - bet);
+				p.addBalance(bet * -1);
+				
 				System.out.println("You lost better luck next time.");
 			}
 			

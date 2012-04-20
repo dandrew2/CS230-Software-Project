@@ -3,15 +3,19 @@ package edu.ycp.casino.shared;
 import edu.ycp.casino.shared.cardgame.Hand;
 
 public class Player extends User{
-	private int balance;
-	//TODO: Make a wallet
+	private Wallet w; 
 	private Hand hand;
 	
+	public Player(){
+		w = new Wallet(); 
+		hand = new Hand(); 
+	}
+	
 	public int getBalance() {
-		return balance;
+		return w.getBalance(); 
 	}
 	public void addBalance(int balance) {
-		this.balance += balance;
+		w.addFunds(balance); 
 	}
 	public Hand getHand() {
 		return hand;
@@ -24,7 +28,7 @@ public class Player extends User{
 		return 5;
 	}
 	public int getAnti(int anti) {
-		balance-=anti;
+		w.takeBet(anti); 
 		return anti;
 	}
 
