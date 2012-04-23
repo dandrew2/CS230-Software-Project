@@ -1,4 +1,5 @@
 package edu.ycp.casino;
+
 import java.util.Random; 
 import java.util.Scanner;
 
@@ -9,15 +10,14 @@ import edu.ycp.casino.shared.SlotsSymbols;
 public class Slots extends Game {
 	
 	private SlotsSymbols[] slot = new SlotsSymbols[3];
+	private int money;
+	public int bet;
 	
 	public Slots()
 	{
 		this.slot = new SlotsSymbols[3];
 		
-		for(int i = 0; i < 3; i++) //Initialize slot
-		{
-			slot[i] = SlotsSymbols.WATERMELON;
-		}
+		this.money = 1000;
 	}
 	
 	
@@ -31,7 +31,9 @@ public class Slots extends Game {
 	//Setter method
 	public void setSlot(SlotsSymbols[] slot){
 	
-	this.slot = slot;
+		this.slot = slot;
+		setChanged();
+		notifyObservers();
 	}
 	
 	
@@ -52,12 +54,25 @@ public class Slots extends Game {
 		}
 	}
 	
+	public int getMoney()
+	{
+		return this.money;
+	}
+	
+	public void setMoney(int m)
+	{
+		this.money = m;
+		setChanged();
+		notifyObservers();
+	}
+	
 	
 	//Method to assign random values to slot.
 	public void spin(){
 		
 		Random rand = new Random(); 
 		int newNumber;
+		SlotsSymbols[] newSlot = new SlotsSymbols[3];
 
 	
 		for(int i = 0; i < 3; i++)
@@ -66,103 +81,53 @@ public class Slots extends Game {
 			
 			if(newNumber == 0)
 			{
-				this.slot[i] = SlotsSymbols.BAR;
+				newSlot[i] = SlotsSymbols.BAR;
 			}
 			
 			if(newNumber == 1)
 			{
-				this.slot[i] = SlotsSymbols.BELL;
+				newSlot[i] = SlotsSymbols.BELL;
 			}
 			
 			if(newNumber == 2)
 			{
-				this.slot[i] = SlotsSymbols.CHERRY;
+				newSlot[i] = SlotsSymbols.CHERRY;
 			}
 			
 			if(newNumber == 3)
 			{
-				this.slot[i] = SlotsSymbols.GRAPES;
+				newSlot[i] = SlotsSymbols.GRAPES;
 			}
 			
 			if(newNumber == 4)
 			{
-				this.slot[i] = SlotsSymbols.LIME;
+				newSlot[i] = SlotsSymbols.LIME;
 			}
 			
 			if(newNumber == 5)
 			{
-				this.slot[i] = SlotsSymbols.ORANGE;
+				newSlot[i] = SlotsSymbols.ORANGE;
 			}
 			
 			if(newNumber == 6)
 			{
-				this.slot[i] = SlotsSymbols.PLUM;
+				newSlot[i] = SlotsSymbols.PLUM;
 			}
 			
 			if(newNumber == 7)
 			{
-				this.slot[i] = SlotsSymbols.SEVEN;
+				newSlot[i] = SlotsSymbols.SEVEN;
 			}	
 			
 			if(newNumber == 8)
 			{
-				this.slot[i] = SlotsSymbols.WATERMELON;
+				newSlot[i] = SlotsSymbols.WATERMELON;
 			}	
 						
 		}
 		
+		this.setSlot(newSlot);	
 	}
 	
-	
-	public void play(Player p)
-	{
-		int bet;
-		boolean stillPlaying = true;
-		Scanner keyboard = new Scanner(System.in);
-		
-		while(stillPlaying == true)
-		{
-			System.out.println("How much would you like to bet?");
-		
-			bet = keyboard.nextInt();
-		
-			this.spin();
-			
-			this.printSlot();
-		
-			if(this.checkWin() == true)
-			{
-				p.setBalance(p.getBalance() + bet);
-				System.out.println("Congrats you won!");
-			}else
-			{
-				p.setBalance(p.getBalance() - bet);
-				System.out.println("You lost better luck next time.");
-			}
-			
-			System.out.println("You now have: " + p.getBalance());
-			
-			if(p.getBalance() <= 0)	//check player still has money.
-			{
-				System.out.println("You've gone broke.");
-				break;
-			}
-			
-			System.out.println("Would you like to keep playing (Press 1 to exit)?");
-			
-			if(keyboard.nextInt() == 1)
-			{
-				System.out.println("Thanks for playing");
-				stillPlaying = false;
-			}
-		
-		}
-	}
-	
-	//Method to print out slot to console.
-	public void printSlot()
-	{
-		System.out.println("Slot: " + this.slot[0].toString() + " " + this.slot[1].toString() + " " + this.slot[2].toString());
-	}
-
 }
+	
