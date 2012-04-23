@@ -6,5 +6,6 @@ public enum BetType {
 	FIRST_TWELVE,
 	MIDDLE_TWELVE,
 	LAST_TWELVE,
-	ZERO, 
+	ZERO,
+	NUM_MATCH,
 }

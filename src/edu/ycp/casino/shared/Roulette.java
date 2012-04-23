@@ -20,6 +20,8 @@ public class Roulette {
 	
 		public Roulette(){
 			wheel = new int[38]; 
+			p = new Pot(); 
+			
 			for(int i = 0; i < 37; i++){
 				wheel[i] =  i; 
 			}
@@ -47,6 +49,10 @@ public class Roulette {
 	public Boolean checkWin(BetType b, int betNumber, int wheelNumber){
 		Boolean win = false;
 		SlotColor color = getColor(wheelNumber); 
+		
+		if(b == BetType.NUM_MATCH && betNumber == wheelNumber){
+			win = true; 
+		}
 		
 		if(b == BetType.BLACK && color == SlotColor.BLACK){
 			win = true; 
@@ -78,15 +84,30 @@ public class Roulette {
 		return win; 
 	}
 	
-	//public int getPayout(int bet){
-		//if(b == BetType.)
-	//}
+	public int getPayout(int bet){
+		int payout = 0; 
+		
+		if(btype == BetType.NUM_MATCH){
+			payout = bet*37; 
+		}
+		
+		if(btype == BetType.BLACK || btype == BetType.RED){
+			payout = bet*2; 
+		}
+		
+		if(btype == BetType.FIRST_TWELVE || btype == BetType.MIDDLE_TWELVE || btype == BetType.LAST_TWELVE){
+			payout = bet*3; 
+		}
+		
+		return payout; 
+	}
 	
 	
 	public void play(Player p){
 		int betAmount;
 		int type; 
 		int numToBet;
+		int wheelNum; 
 		BetType b = null; 
 		
 		Scanner keyboard = new Scanner(System.in);
@@ -99,7 +120,8 @@ public class Roulette {
 		
 		if(type == 6){
 			System.out.println("Please enter a num to bet"); 
-			numToBet = keyboard.nextInt(); 
+			numToBet = keyboard.nextInt();
+			b = BetType.NUM_MATCH; 
 		}
 		
 		if(type == 1){
@@ -119,6 +141,10 @@ public class Roulette {
 		}
 		
 		placeBet(betAmount, b); 
+		
+		wheelNum = spinWheel();
+		
+		System.out.printf("The wheel landed on %i", wheelNum); 
 		
 	}
 }
