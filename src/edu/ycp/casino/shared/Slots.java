@@ -1,11 +1,8 @@
-package edu.ycp.casino;
+package edu.ycp.casino.shared;
 
 import java.util.Random; 
 import java.util.Scanner;
 
-import edu.ycp.casino.shared.Game;
-import edu.ycp.casino.shared.Player;
-import edu.ycp.casino.shared.SlotsSymbols;
 
 public class Slots extends Game {
 	
