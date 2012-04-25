@@ -31,5 +31,9 @@ public class Player extends User{
 		w.takeBet(anti); 
 		return anti;
 	}
+	
+	public Wallet getWallet(){
+		return w; 
+	}
 
 }
