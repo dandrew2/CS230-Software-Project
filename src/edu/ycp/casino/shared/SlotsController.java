@@ -1,11 +1,12 @@
 package edu.ycp.casino.shared;
 
-import edu.ycp.casino.SlotsView;
+import edu.ycp.casino.client.SlotsViewGWT;
+
 
 public class SlotsController {
 	
 		Slots model;
-		SlotsView view;
+		SlotsViewGWT view;
 		
 		public SlotsController()
 		{
@@ -37,8 +38,9 @@ public class SlotsController {
 			this.model = model;
 		}
 		
-		public void setView(SlotsView view)
+		public void setView(SlotsViewGWT slotsView)
 		{
-			this.view = view;
+			this.view = slotsView;
 		}
+		
 }
