@@ -13,23 +13,23 @@ public class SlotsController {
 		
 		public void assignPot(int m)
 		{
-			model.bet = m;
+			//model.bet = m;
 		}
 	
 	
 		public void spinHandler()
 		{
-			model.spin();
-			
-			if(model.checkWin() == true)
-			{
-				model.setMoney(model.getMoney() + model.bet);
-			}
-			
-			if(model.checkWin() == false)
-			{
-				model.setMoney(model.getMoney() - model.bet);
-			}
+//			model.spin();
+//			
+//			if(model.checkWin() == true)
+//			{
+//				model.setMoney(model.getMoney() + model.bet);
+//			}
+//			
+//			if(model.checkWin() == false)
+//			{
+//				model.setMoney(model.getMoney() - model.bet);
+//			}
 		}
 		
 		public void setModel(Slots model)

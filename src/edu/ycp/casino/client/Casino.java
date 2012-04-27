@@ -9,15 +9,26 @@ import edu.ycp.casino.shared.Slots;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Casino implements EntryPoint {
+	
+	private static boolean SHOW_SLOTS = false;
+	
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		Slots model = new Slots();
-		
-		SlotsViewGWT slotsView = new SlotsViewGWT();
-		slotsView.setModel(model);
-		
-		RootLayoutPanel.get().add(slotsView);
+		if (SHOW_SLOTS) {
+			Slots model = new Slots();
+			
+			SlotsViewGWT slotsView = new SlotsViewGWT();
+			slotsView.setModel(model);
+			
+			RootLayoutPanel.get().add(slotsView);
+		} else {
+			RouletteView rouletteView = new RouletteView();
+			
+			RootLayoutPanel.get().add(rouletteView);
+			
+			rouletteView.drawOnCanvas();
+		}
 	}
 }

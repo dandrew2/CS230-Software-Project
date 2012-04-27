@@ -2,6 +2,7 @@ package edu.ycp.casino.client;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.canvas.dom.client.FillStrokeStyle;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -60,12 +61,14 @@ public class RouletteView extends Composite{
 		canvas = Canvas.createIfSupported();
 		canvas.setWidth("200px");
 		canvas.setHeight("400px");
-		absolutePanel.add(canvas, 200, 10);
+		absolutePanel.add(canvas, 300, 10);
 		
 		context = canvas.getContext2d();
 	}
 	
 	public void drawOnCanvas() {
+		CssColor green = CssColor.make("#0F0");
+		context.setFillStyle(green);
 		context.fillRect(10, 10, 60, 60);
 	}
 }

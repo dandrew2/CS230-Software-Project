@@ -123,6 +123,6 @@ public class SlotsView extends JPanel implements Observer {
 		lblSlot1.setText(model.getSlot()[1].toString());
 		lblSlot2.setText(model.getSlot()[2].toString());
 		
-		lblMoneyDisplay.setText(Integer.toString(model.getMoney()));		
+		//lblMoneyDisplay.setText(Integer.toString(model.getMoney()));		
 	}
 }
