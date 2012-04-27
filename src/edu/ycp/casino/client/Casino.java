@@ -24,7 +24,7 @@ public class Casino implements EntryPoint {
 		slotsView.setController(controller);
 		model.spin();
 		
-		slotsView.update(null, null);
+		slotsView.update(model, null);
 		
 		RootLayoutPanel.get().add(slotsView);
 	}

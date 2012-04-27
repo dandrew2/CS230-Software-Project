@@ -16,6 +16,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
 
 public class SlotsViewGWT extends Composite implements Observer {
 	private Slots model;
@@ -25,6 +27,7 @@ public class SlotsViewGWT extends Composite implements Observer {
 	private Label labelDisplaySlot3;
 	private Label lblCurrentMoneyDisplay;
 	private TextBox textBoxBetText;
+	private Button btnSpin;
 
 	public SlotsViewGWT() {
 		
@@ -37,14 +40,18 @@ public class SlotsViewGWT extends Composite implements Observer {
 		layoutPanel.setWidgetLeftWidth(lblSlot1, 58.0, Unit.PX, 90.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(lblSlot1, 77.0, Unit.PX, 18.0, Unit.PX);
 		
-		Button btnSpin = new Button("Spin");
+		btnSpin = new Button("Spin");
+		btnSpin.addDoubleClickHandler(new DoubleClickHandler() {
+			public void onDoubleClick(DoubleClickEvent event) {
+			}
+		});
 		btnSpin.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 			}
 		});
 		layoutPanel.add(btnSpin);
 		layoutPanel.setWidgetLeftWidth(btnSpin, 58.0, Unit.PX, 81.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(btnSpin, 249.0, Unit.PX, 30.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(btnSpin, 227.0, Unit.PX, 30.0, Unit.PX);
 		
 		Label lblSlot2 = new Label("Slots 2:");
 		layoutPanel.add(lblSlot2);
@@ -74,17 +81,17 @@ public class SlotsViewGWT extends Composite implements Observer {
 		Label lblCurrentBet = new Label("Current Bet");
 		layoutPanel.add(lblCurrentBet);
 		layoutPanel.setWidgetLeftWidth(lblCurrentBet, 304.0, Unit.PX, 90.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(lblCurrentBet, 203.0, Unit.PX, 18.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(lblCurrentBet, 215.0, Unit.PX, 18.0, Unit.PX);
 		
 		textBoxBetText = new TextBox();
 		layoutPanel.add(textBoxBetText);
 		layoutPanel.setWidgetLeftWidth(textBoxBetText, 304.0, Unit.PX, 75.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(textBoxBetText, 227.0, Unit.PX, 18.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(textBoxBetText, 239.0, Unit.PX, 18.0, Unit.PX);
 		
 		Label lblCurrentMoney = new Label("Current Money");
 		layoutPanel.add(lblCurrentMoney);
 		layoutPanel.setWidgetLeftWidth(lblCurrentMoney, 304.0, Unit.PX, 97.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(lblCurrentMoney, 148.0, Unit.PX, 18.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(lblCurrentMoney, 155.0, Unit.PX, 18.0, Unit.PX);
 		
 		lblCurrentMoneyDisplay = new Label("");
 		layoutPanel.add(lblCurrentMoneyDisplay);
@@ -108,8 +115,15 @@ public class SlotsViewGWT extends Composite implements Observer {
 		System.out.println("Phase 1");
 		controller.assignPot(Integer.parseInt(textBoxBetText.getText()));
 		controller.spinHandler();
-		
 	}
+	
+	public void onDoubleClick(DoubleClickEvent event)
+	{
+		System.out.println("Phase 1");
+		controller.assignPot(Integer.parseInt(textBoxBetText.getText()));
+		controller.spinHandler();
+	}
+	
 	
 	public void setController(SlotsController c)
 	{
