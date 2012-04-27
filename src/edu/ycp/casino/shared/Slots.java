@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Slots extends Game {
 	
 	private SlotsSymbols[] slot = new SlotsSymbols[3];
-	
+	private int money; 
 	public Slots()
 	{
 		this.slot = new SlotsSymbols[3];
@@ -113,48 +113,7 @@ public class Slots extends Game {
 	
 	public void play(Player p)
 	{
-		int bet;
-		boolean stillPlaying = true;
-		Scanner keyboard = new Scanner(System.in);
 		
-		while(stillPlaying == true)
-		{
-			System.out.println("How much would you like to bet?");
-		
-			bet = keyboard.nextInt();
-		
-			this.spin();
-			
-			this.printSlot();
-		
-			if(this.checkWin() == true)
-			{
-				p.addBalance(bet);
-				System.out.println("Congrats you won!");
-			}else
-			{
-				p.addBalance(bet * -1);
-				
-				System.out.println("You lost better luck next time.");
-			}
-			
-			System.out.println("You now have: " + p.getBalance());
-			
-			if(p.getBalance() <= 0)	//check player still has money.
-			{
-				System.out.println("You've gone broke.");
-				break;
-			}
-			
-			System.out.println("Would you like to keep playing (Press 1 to exit)?");
-			
-			if(keyboard.nextInt() == 1)
-			{
-				System.out.println("Thanks for playing");
-				stillPlaying = false;
-			}
-		
-		}
 	}
 	
 	//Method to print out slot to console.
