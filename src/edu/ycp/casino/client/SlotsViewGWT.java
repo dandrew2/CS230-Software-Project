@@ -103,7 +103,7 @@ public class SlotsViewGWT extends Composite implements Observer {
 		labelDisplaySlot2.setText(model.getSlot()[1].toString());
 		labelDisplaySlot3.setText(model.getSlot()[2].toString());
 		
-		lblCurrentMoneyDisplay.setText(Integer.toString(model.getMoney()));
+		//lblCurrentMoneyDisplay.setText(Integer.toString(model.getMoney()));
 	}
 	
 	public void runClick()
