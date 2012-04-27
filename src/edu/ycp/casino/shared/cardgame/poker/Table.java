@@ -65,7 +65,7 @@ public class Table {
 		dealer.dealRiver(this.community);
 		System.out.println("All cards delt.  Community cards: "+this.community.toString()+"\n");
 		takeBets();
-		getWinner().getWallet().add(this.pot.takeAll());
+		getWinner().getWallet().addFunds(this.pot.takeAll());
 	}
 	
 	public Player getWinner(){

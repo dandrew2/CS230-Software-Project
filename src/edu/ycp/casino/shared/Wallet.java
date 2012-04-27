@@ -1,21 +1,25 @@
 package edu.ycp.casino.shared;
 
 public class Wallet {
-	private int balance;
+	private int balance; 
 	
+	public Wallet(){
+		this.balance = 0; 
+	}
+
 	public Wallet(int balance){
 		this.balance=balance;
 	}
+	
+	public void addFunds(int x){
+		balance += x; 
+	}
+	
 	public int getBalance(){
 		return balance;
 	}
-	public int take(int amount){
-		if (balance<amount)
-			return balance;
-		else
-			return amount;
-	}
-	public void add(int amount){
-		balance+=amount;
+	
+	public void takeBet(int x){
+		balance -= x;
 	}
 }
