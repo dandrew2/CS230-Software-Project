@@ -41,12 +41,9 @@ public class SlotsViewGWT extends Composite implements Observer {
 		layoutPanel.setWidgetTopHeight(lblSlot1, 77.0, Unit.PX, 18.0, Unit.PX);
 		
 		btnSpin = new Button("Spin");
-		btnSpin.addDoubleClickHandler(new DoubleClickHandler() {
-			public void onDoubleClick(DoubleClickEvent event) {
-			}
-		});
 		btnSpin.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				runClick();
 			}
 		});
 		layoutPanel.add(btnSpin);
@@ -107,19 +104,10 @@ public class SlotsViewGWT extends Composite implements Observer {
 		labelDisplaySlot3.setText(model.getSlot()[2].toString());
 		
 		lblCurrentMoneyDisplay.setText(Integer.toString(model.getMoney()));
-		System.out.println("Phase 3");
 	}
 	
-	public void onClick(ClickEvent event)
+	public void runClick()
 	{
-		System.out.println("Phase 1");
-		controller.assignPot(Integer.parseInt(textBoxBetText.getText()));
-		controller.spinHandler();
-	}
-	
-	public void onDoubleClick(DoubleClickEvent event)
-	{
-		System.out.println("Phase 1");
 		controller.assignPot(Integer.parseInt(textBoxBetText.getText()));
 		controller.spinHandler();
 	}

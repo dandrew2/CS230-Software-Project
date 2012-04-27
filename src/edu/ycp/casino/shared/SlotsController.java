@@ -15,7 +15,6 @@ public class SlotsController {
 		public void assignPot(int m)
 		{
 			model.bet = m;
-			System.out.println("Phase 1.5");
 		}
 	
 	
@@ -32,9 +31,6 @@ public class SlotsController {
 			{
 				model.setMoney(model.getMoney() - model.bet);
 			}
-			
-			System.out.println("Phase 2");
-			view.update(model, null);
 		}
 		
 		public void setModel(Slots model)
