@@ -124,6 +124,5 @@ public class Slots extends Game {
 		
 		this.setSlot(newSlot);	
 	}
-	
 }
 	
