@@ -1,7 +1,6 @@
 package edu.ycp.casino.shared;
 
 import java.util.Random; 
-import java.util.Scanner;
 
 
 public class Slots extends Game {

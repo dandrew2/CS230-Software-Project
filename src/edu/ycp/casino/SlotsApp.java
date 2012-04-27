@@ -16,12 +16,11 @@ public class SlotsApp {
 			{
 				Slots model = new Slots();
 				SlotsController controller = new SlotsController();
-				
 				SlotsView view = new SlotsView();
+				
 				view.setModel(model);
 				controller.setModel(model);
 				view.setController(controller);
-				
 				
 				view.update(null);
 				
