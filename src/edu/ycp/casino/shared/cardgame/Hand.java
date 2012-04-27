@@ -6,15 +6,37 @@ import java.util.Collections;
 
 public class Hand implements Comparable<Hand>{
 	ArrayList<Card> cards;
+	//The owner field is used to keep track of the hand's owner during the process of comparing hands.
+	int owner;
+	
 	public Hand(){
 		cards = new ArrayList<Card>();
 	}
 	
-	public Hand(ArrayList<Card> cards){
-		this.cards = cards;
+	public Hand(ArrayList<Card> _cards){
+		this.cards=new ArrayList<Card>();
+		this.cards.addAll(_cards);
 	}
 	
-    public ArrayList<Card> drawCards(int numCards){
+	public Hand(int owner){
+		this.owner = owner;
+	}
+	
+	public Hand(ArrayList<Card> _cards,int owner){
+		this.cards=new ArrayList<Card>();
+		this.cards.addAll(_cards);
+		this.owner = owner;
+	}
+	
+    public int getOwner() {
+		return owner;
+	}
+
+	public void setOwner(int owner) {
+		this.owner = owner;
+	}
+
+	public ArrayList<Card> drawCards(int numCards){
     	ArrayList<Card> hand=new ArrayList<Card>();
     	for(int x=0; x<numCards; x++){
     		hand.add(drawCard());
@@ -57,9 +79,8 @@ public class Hand implements Comparable<Hand>{
 	}
 
 	public HandType parseHandType(){
-    	if(getNumCards()<5)
+    	if((getNumCards()<5) || (getNumCards()>5))
     		return HandType.INVALID;
-    	this.sort();
 		if (isFlush()){
 			if(isRoyal())
 				return HandType.ROYALFLUSH;
@@ -73,9 +94,9 @@ public class Hand implements Comparable<Hand>{
 		}
 		else{
 			int num=getNumOfAKind();
-			if(num==2){
-				if(num==3){
-					if (num==4)
+			if(num>1){
+				if(num>2){
+					if (num>3)
 						return HandType.FOUROFAKIND;
 					else if(isFullHouse())
 						return HandType.FULLHOUSE;
@@ -92,22 +113,73 @@ public class Hand implements Comparable<Hand>{
 		}
 	}
     
+	private ArrayList<Rank> makeRankList(){
+    	ArrayList<Rank> handRankList = new ArrayList<Rank>();
+    	for(Card card : cards){
+    		handRankList.add(card.getRank());
+    	}
+    	return handRankList;
+	}
+	
+	private ArrayList<Integer> makeRankOrdList(){
+    	ArrayList<Integer> handRankOrdList = new ArrayList<Integer>();
+    	for(Card card : cards){
+    		handRankOrdList.add(card.getRank().ordinal());
+    	}
+    	return handRankOrdList;
+	}
+	private ArrayList<Rank> makeRankList(ArrayList<Card> tmpCards){
+    	ArrayList<Rank> handRankList = new ArrayList<Rank>();
+    	if(tmpCards.size()>0){
+    		for(Card card : tmpCards){
+    			handRankList.add(card.getRank());
+    		}
+    	}
+    	return handRankList;
+	}
+	
+	private ArrayList<Integer> makeRankOrdList(ArrayList<Card> tmpCards){
+    	ArrayList<Integer> handRankOrdList = new ArrayList<Integer>();
+    	if(tmpCards.size()>0){
+	    	for(Card card : tmpCards){
+	    		handRankOrdList.add(card.getRank().ordinal());
+	    	}
+    	}
+    	return handRankOrdList;
+	}
+	
     private int getNumOfAKind(){
+    	ArrayList<Rank> rankList = makeRankList();
     	int x=0;
     	for (Card card : cards){
-    		x=Collections.frequency(cards,card);
-    		if (x>1)
+    		x=Collections.frequency(rankList,card.getRank());
+    		if (x>1){
     			break;
+    		}
+    	}
+    	return x;
+    }
+    
+    private int getNumOfAKind(ArrayList<Card> tmpCards){
+    	ArrayList<Rank> rankList = makeRankList(tmpCards);
+    	int x=0;
+    	if(tmpCards.size()>0){
+    		for (Card card : tmpCards){
+    			x=Collections.frequency(rankList,card.getRank());
+    			if (x>1){
+    				break;
+    			}
+    		}
     	}
     	return x;
     }
     
     private boolean isTwoPair() {
+    	ArrayList<Rank> rankList = makeRankList();
     	int x=0;
     	Card card=null;
-    	//Find one pair.
     	for (Card tmpCard : cards){
-    		x=Collections.frequency(cards,tmpCard);
+    		x=Collections.frequency(rankList,tmpCard.getRank());
     		if (x>1){
     			card=tmpCard;
     			break;
@@ -118,13 +190,15 @@ public class Hand implements Comparable<Hand>{
     		return false;
     	else{
     		//Make a temporary duplicate.
-    		ArrayList<Card> tempCards=new ArrayList<Card>();
-    		Collections.copy(tempCards,cards);
-    		Collections.replaceAll(cards, card, null);
-    		if (this.getNumOfAKind()>1)
+    		ArrayList<Card> tempCards=new ArrayList<Card>(cards);
+    		while(tempCards.contains(card))
+    			tempCards.remove(card);
+    		if (this.getNumOfAKind(tempCards)>1){
     			return true;
-    		else
+    		}
+    		else{
     			return false;
+    		}
     	}
 	}
     
@@ -144,13 +218,15 @@ public class Hand implements Comparable<Hand>{
     		return false;
     	else{
     		//Make a temporary duplicate.
-    		ArrayList<Card> tempCards=new ArrayList<Card>();
-    		Collections.copy(tempCards,cards);
-    		Collections.replaceAll(cards, card, null);
-    		if (this.getNumOfAKind()>2)
+    		ArrayList<Card> tempCards=new ArrayList<Card>(cards);
+    		while(tempCards.contains(card))
+    			tempCards.remove(card);
+    		if (this.getNumOfAKind()>2){
     			return true;
-    		else
+    		}
+    		else{
     			return false;
+    		}
     	}
 	}
 	
@@ -184,13 +260,12 @@ public class Hand implements Comparable<Hand>{
     }
     
     private boolean isStraight(){
-    	ArrayList<Integer> handRankOrdList = new ArrayList<Integer>();
-    	for(Card card : cards){
-    		handRankOrdList.add(card.getRank().ordinal());
-    	}
+    	//Make a list of rank ordinals
+    	ArrayList<Integer> handRankOrdList = makeRankOrdList();
+    	//find the highest rank ordinal
     	int topRank=Collections.max(handRankOrdList);
-    	for(int x=0; x<handRankOrdList.size(); x++){
-    		int found=Collections.frequency(handRankOrdList, topRank-1);
+    	for(int x=1; x<handRankOrdList.size(); x++){
+    		int found=Collections.frequency(handRankOrdList, topRank-x);
     		if (found<1)
     			return false;
     	}
@@ -200,9 +275,9 @@ public class Hand implements Comparable<Hand>{
     public String toString(){
     	String str="";
     	for(Card card : this.cards){
-    		str+=card.toString()+" , ";
+    		str+=card.toString()+"  ";
     	}
-    	return str.substring(0,(str.length()-3));
+    	return str.substring(0,(str.length()-2));
     }
 
 	@Override

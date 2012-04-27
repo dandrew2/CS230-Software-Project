@@ -15,14 +15,29 @@ public class Table {
 	Hand community;
 	Pot pot;
 	
-	public Table(ArrayList<Player> players){
+	private ArrayList<Player> makePlayers(int numPlayers){
+		ArrayList<Player> players=new ArrayList<Player>();
+		for(int pNum=0; pNum<numPlayers; pNum++){
+			players.add(new Player(50,pNum));
+		}
+		return players;
+	}
+	
+	public Table(){
 		//Instantiate objects;
-		comperator = new HandComperator();
-		pot = new Pot();
-		community = new Hand();
-		dealer = new Dealer();
-		players = new ArrayList<Player>();
-		this.players=players;
+		this.comperator = new HandComperator();
+		this.pot = new Pot();
+		this.community = new Hand();
+		this.dealer = new Dealer();
+		this.players = makePlayers(5);
+	}
+	public Table(ArrayList<Player> _players){
+		//Instantiate objects;
+		this.comperator = new HandComperator();
+		this.pot = new Pot();
+		this.community = new Hand();
+		this.dealer = new Dealer();
+		this.players = _players;
 	}
 	
 	public void takeBets(){
@@ -39,6 +54,7 @@ public class Table {
 	
 	public void play(){
 		dealer.newDeck();
+		players=makePlayers(5);
 		takeAnti();
 		dealer.deal(players);
 		takeBets();
@@ -47,8 +63,9 @@ public class Table {
 		dealer.dealTurn(this.community);
 		takeBets();
 		dealer.dealRiver(this.community);
+		System.out.println("All cards delt.  Community cards: "+this.community.toString()+"\n");
 		takeBets();
-		getWinner().addBalance(this.pot.takeAll());
+		getWinner().getWallet().add(this.pot.takeAll());
 	}
 	
 	public Player getWinner(){
