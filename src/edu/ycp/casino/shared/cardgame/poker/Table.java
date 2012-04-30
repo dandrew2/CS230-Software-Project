@@ -8,12 +8,13 @@ import edu.ycp.casino.shared.cardgame.Hand;
 
 public class Table {
 	
-	final int ANTI=5;
-	HandComperator comperator;
-	ArrayList<Player> players;
-	Dealer dealer;
-	Hand community;
-	Pot pot;
+	private final int ANTI=5;
+	private HandComperator comperator;
+	private ArrayList<Player> players;
+	private Dealer dealer;
+	private Hand community;
+	private Pot pot;
+	private int currentPlayer=0;
 	
 	private ArrayList<Player> makePlayers(int numPlayers){
 		ArrayList<Player> players=new ArrayList<Player>();
@@ -30,6 +31,9 @@ public class Table {
 		this.community = new Hand();
 		this.dealer = new Dealer();
 		this.players = makePlayers(5);
+		dealer.newDeck();
+		dealer.dealNext(players, community);
+		iterateCurrentPlayer();
 	}
 	public Table(ArrayList<Player> _players){
 		//Instantiate objects;
@@ -38,11 +42,32 @@ public class Table {
 		this.community = new Hand();
 		this.dealer = new Dealer();
 		this.players = _players;
+		dealer.newDeck();
+		dealer.dealNext(players, community);
+		iterateCurrentPlayer();
+	}
+	public void newGame(){
+		this.pot = new Pot();
+		this.community = new Hand();
+		dealer.setBettingRound(0);
+		dealer.newDeck();
+		dealer.dealNext(players, community);
+		iterateCurrentPlayer();
 	}
 	
 	public void takeBets(){
 		for (Player player : players){
-			pot.add(player.getBet());
+			pot.add(player.takeHoldingBet(pot.getMinBet()));
+		}
+	}
+	
+	public void iterateCurrentPlayer(){
+		if(currentPlayer<players.size()-1)
+			currentPlayer++;
+		else{
+			currentPlayer=0;
+			pot.resetMinBet(ANTI);
+			dealer.dealNext(players,community);
 		}
 	}
 	
@@ -51,10 +76,18 @@ public class Table {
 			pot.add(player.getAnti(ANTI));
 		}
 	}
+
+	public Player getCurrentPlayer(){
+		return players.get(currentPlayer);
+	}
+	public void setCurrentPlayer(int playerNum){
+		currentPlayer=playerNum;
+	}
+	public int getCurrentPlayerNum(){
+		return currentPlayer;
+	}
 	
 	public void play(){
-		dealer.newDeck();
-		players=makePlayers(5);
 		takeAnti();
 		dealer.deal(players);
 		takeBets();
@@ -63,9 +96,12 @@ public class Table {
 		dealer.dealTurn(this.community);
 		takeBets();
 		dealer.dealRiver(this.community);
-		System.out.println("All cards delt.  Community cards: "+this.community.toString()+"\n");
 		takeBets();
 		getWinner().getWallet().addFunds(this.pot.takeAll());
+	}
+	
+	public boolean gameIsOver(){
+		return (dealer.getBettingRound()==-1);
 	}
 	
 	public Player getWinner(){
@@ -99,5 +135,19 @@ public class Table {
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
+
+	public int getAnti() {
+		return ANTI;
+	}
+
+	public Pot getPot() {
+		return pot;
+	}
+
+	public void setPot(Pot pot) {
+		this.pot = pot;
+	}
+	
+	
 	
 }

@@ -17,8 +17,10 @@ public class HandComperator {
 			//Get each player's best hand
 			playerHands.add(getBestPossible(community,player));
 		}
+		//find best hand
 		Hand bestHand=getBestHand(playerHands);
-		System.out.println("Winning player number: "+bestHand.getOwner());
+		//Tell the player what they have
+		players.get(bestHand.getOwner()).setHandType(bestHand.parseHandType());
 		return players.get(bestHand.getOwner());
 	}
 	
@@ -57,7 +59,6 @@ public class HandComperator {
 	
 	//Get the best hand out of a list
 	private Hand getBestHand(ArrayList<Hand> hands){
-		System.out.println("Best hand:  "+Collections.max(hands).toString()+", which is a "+Collections.max(hands).parseHandType());
 		return Collections.max(hands);
 	}
 }

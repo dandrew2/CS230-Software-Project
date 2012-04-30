@@ -1,7 +1,7 @@
 package edu.ycp.casino.shared;
 
 public class Wallet {
-	private int balance; 
+	private int balance;
 	
 	public Wallet(){
 		this.balance = 0; 
