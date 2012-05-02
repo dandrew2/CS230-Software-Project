@@ -34,4 +34,8 @@ public class Dealer {
 	public void dealRiver(Hand tableHand){
 		tableHand.addCard(this.deck.drawCard());
 	}
+	//getting dealer to draw for blackjack
+		public void dealTo(Player p){
+			p.getHand().addCard(this.deck.drawCard());
+		}
 }

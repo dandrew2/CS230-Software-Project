@@ -209,4 +209,53 @@ public class Hand implements Comparable<Hand>{
 	public int compareTo(Hand other) {
 		return (this.parseHandType().ordinal() - other.parseHandType().ordinal());
 	}
+	public int getBJHandValue (){
+		int value = 0;
+		for (int i = 0; i < this.getNumCards();i++){
+			value = value + this.getBJCardValue(this.getCard(i));
+		}
+		if (value<=11){
+			for(Card card : this.getCards()){
+				if (card.getRank()==Rank.ACE){
+					value+=10;
+					break;
+				}
+			}
+		}
+		return value;
+	}
+
+	//get card value and changing the ace value
+	public int getBJCardValue(Card c){
+		int cardNum=c.getRank().ordinal()+1;
+		if (cardNum>10)
+			return 10;
+		return cardNum;
+	}
+	//get highest hand
+	public int compareBJ(Hand other){
+		//if handvalue are the same
+		if (this.getBJHandValue() == other.getBJHandValue()){
+			//compare number of cards in hand
+			if (other.getNumCards() == this.getNumCards()){
+				return 0;
+			}
+			//if less cards
+			else if(this.getNumCards() < other.getNumCards()){
+				return 1;
+			}
+			//if more cards
+			else {
+				return -1;
+			}
+		}
+		// if handvalue is less
+		else if (this.getBJHandValue() < other.getBJHandValue()){
+			return -1;
+		}
+		// if handvalue is more
+		else {
+			return 1;
+		}
+	}
 }
