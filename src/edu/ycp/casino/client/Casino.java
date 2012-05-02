@@ -11,7 +11,7 @@ import edu.ycp.casino.shared.SlotsController;
  */
 public class Casino implements EntryPoint {
 	
-	private static boolean SHOW_SLOTS = false;
+	private static boolean SHOW_SLOTS = true;
 	
 	/**
 	 * This is the entry point method.

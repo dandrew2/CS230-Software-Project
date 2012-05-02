@@ -6,6 +6,11 @@ public class Wallet {
 	public Wallet(){
 		this.balance = 0; 
 	}
+
+	public Wallet(int balance){
+		this.balance=balance;
+	}
+	
 	public void addFunds(int x){
 		balance += x; 
 	}

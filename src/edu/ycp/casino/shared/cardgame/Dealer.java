@@ -16,8 +16,13 @@ public class Dealer {
 	}
 	
 	public void deal(ArrayList<Player> players){
+		int x=0;
 		for(Player player : players){
-			player.getHand().addCard(this.deck.drawCard());
+			for(int cardNum=0; cardNum<2; cardNum++){
+				player.getHand().addCard(this.deck.drawCard());
+			}
+		System.out.println("Player "+x+" delt hand: "+player.getHand().toString());
+		x++;
 		}
 	}
 	

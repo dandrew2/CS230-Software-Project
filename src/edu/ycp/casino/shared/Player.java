@@ -5,12 +5,31 @@ import edu.ycp.casino.shared.cardgame.Hand;
 public class Player extends User{
 	private Wallet w; 
 	private Hand hand;
+	private int seatNum;
 	
 	public Player(){
 		w = new Wallet(); 
 		hand = new Hand(); 
 	}
 	
+	public Player(int funds,Hand hand,int seat){
+		this.w=new Wallet(funds);
+		this.hand=hand;
+		this.seatNum=seat;
+	}
+	
+	public Player(int funds,int seat){
+		this.w=new Wallet(funds);
+		this.hand=new Hand();
+		this.seatNum=seat;
+	}
+
+	public int getSeatNum() {
+		return seatNum;
+	}
+	public void setSeatNum(int seatNum) {
+		this.seatNum = seatNum;
+	}	
 	public int getBalance() {
 		return w.getBalance(); 
 	}
@@ -24,7 +43,7 @@ public class Player extends User{
 		this.hand = hand;
 	}
 	public int getBet() {
-		// TODO impliment a bet getter
+		// TODO impliment a UI bet getter
 		return 5;
 	}
 	public int getAnti(int anti) {
@@ -37,3 +56,4 @@ public class Player extends User{
 	}
 
 }
+
