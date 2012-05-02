@@ -277,7 +277,12 @@ public class Hand implements Comparable<Hand>{
     	for(Card card : this.cards){
     		str+=card.toString()+"  ";
     	}
-    	return str.substring(0,(str.length()-2));
+    	try{
+    		return str.substring(0,(str.length()-2));
+    	}
+    	catch(StringIndexOutOfBoundsException e){
+    		return"";
+    	}
     }
 
 	@Override

@@ -39,7 +39,9 @@ public class Card implements Comparable<Card>{
 		else
 			return Color.RED;
 	}
-
+	public String toImageFileName(){
+		return this.rank.toString()+"-"+(this.suit.ordinal()+1);
+	}
 	public int compareTo(Card other) {
 		if (this.getSuit().compareTo(other.getSuit())==0)
 			return this.getRank().ordinal()-other.getRank().ordinal();

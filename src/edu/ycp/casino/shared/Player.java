@@ -1,11 +1,15 @@
 package edu.ycp.casino.shared;
 
 import edu.ycp.casino.shared.cardgame.Hand;
+import edu.ycp.casino.shared.cardgame.HandType;
 
 public class Player extends User{
 	private Wallet w; 
 	private Hand hand;
 	private int seatNum;
+	private int holdingBet;
+	private HandType handType;
+	private boolean folded;
 	
 	public Player(){
 		w = new Wallet(); 
@@ -52,8 +56,47 @@ public class Player extends User{
 	}
 	
 	public Wallet getWallet(){
-		return w; 
+		return w;
+	}
+	public void setHoldingBetPercent(double percent,int minBet){
+		if(w.getBalance()>=minBet)
+			holdingBet=(int)(percent*(w.getBalance()-minBet))+minBet;
+		else
+			holdingBet=0;
+	}
+	public void setHoldingBet(int bet,int minBet){
+		if (bet>=minBet){
+			if(w.getBalance()>=bet)
+				holdingBet=bet;
+			else
+				holdingBet=0;
+		}
+	}
+	public int getHoldingBet(){
+		return holdingBet;
+	}
+	public int takeHoldingBet(int minBet){
+		int temp=holdingBet;
+		w.takeBet(holdingBet);
+		holdingBet=minBet;
+		return temp;
 	}
 
+	public HandType getHandType() {
+		return handType;
+	}
+	
+	public void setHandType(HandType handType) {
+		this.handType = handType;
+	}
+
+	public boolean isFolded() {
+		return folded;
+	}
+
+	public void setFolded(boolean folded) {
+		this.folded = folded;
+	}
+	
 }
 
