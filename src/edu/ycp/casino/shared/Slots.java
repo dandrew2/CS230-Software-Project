@@ -5,7 +5,8 @@ import java.util.Random;
 public class Slots extends Game {
 	
 	private SlotsSymbols[] slot = new SlotsSymbols[3];
-	private int money; 
+	private int money = 1000; 
+	private int bet;
 	public Slots()
 	{
 		this.slot = new SlotsSymbols[3];
@@ -108,7 +109,30 @@ public class Slots extends Game {
 		}
 		
 	}
-	
 
+
+	public int getMoney() {
+		
+		return this.money;
+	}
+
+
+	public void setBet(int m) {
+		this.bet = m;
+	}
+
+
+	public int getBet() {
+
+		return this.bet;
+	}
+
+
+	public void setMoney(int i) {
+		this.money = i;
+		
+	}
+	
+	
 	
 }
