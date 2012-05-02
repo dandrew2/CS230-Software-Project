@@ -13,12 +13,21 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 public class MainMenuGWT extends Composite implements Observer {
+	public interface MainMenuEvents {
+		public void slotsChosen();
+		public void rouletteChosen();
+		public void pokerChosen();
+		public void blackjackChosen();
+	}
+	
 	private Button btnSlots;
 	private Button btnPoker;
 	private Button btnBlackJack;
 	private Button btnRoulette;
 	
 	private MainMenuController controller;
+	
+	private MainMenuEvents callback;
 	
 	public MainMenuGWT() {
 		
@@ -71,25 +80,37 @@ public class MainMenuGWT extends Composite implements Observer {
 		layoutPanel.setWidgetLeftWidth(btnBlackJack, 249.0, Unit.PX, 149.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(btnBlackJack, 219.0, Unit.PX, 54.0, Unit.PX);
 	}
+	
+	public void setCallback(MainMenuEvents callback) {
+		this.callback = callback;
+	}
 
 	public void runSlotsClick()
 	{
-		
+		if (callback != null) {
+			callback.slotsChosen();
+		}
 	}
 	
 	public void runPokerClick()
 	{
-		
+		if (callback != null) {
+			callback.pokerChosen();
+		}
 	}
 	
 	public void runRouletteClick()
 	{
-		
+		if (callback != null) {
+			callback.rouletteChosen();
+		}
 	}
 	
 	public void runBlackJack()
 	{
-		
+		if (callback != null) {
+			callback.blackjackChosen();
+		}
 	}
 	
 	public void setController(MainMenuController mm)
