@@ -1,19 +1,19 @@
 package edu.ycp.casino.shared;
-
 import java.util.Random; 
 
 
 public class Slots extends Game {
 	
 	private SlotsSymbols[] slot = new SlotsSymbols[3];
-	private int money;
-	public int bet;
-	
+	private int money; 
 	public Slots()
 	{
 		this.slot = new SlotsSymbols[3];
 		
-		this.money = 1000;
+		for(int i = 0; i < 3; i++) //Initialize slot
+		{
+			slot[i] = SlotsSymbols.WATERMELON;
+		}
 	}
 	
 	
@@ -27,9 +27,7 @@ public class Slots extends Game {
 	//Setter method
 	public void setSlot(SlotsSymbols[] slot){
 	
-		this.slot = slot;
-		setChanged();
-		notifyObservers();
+	this.slot = slot;
 	}
 	
 	
@@ -50,25 +48,12 @@ public class Slots extends Game {
 		}
 	}
 	
-	public int getMoney()
-	{
-		return this.money;
-	}
-	
-	public void setMoney(int m)
-	{
-		this.money = m;
-		setChanged();
-		notifyObservers();
-	}
-	
 	
 	//Method to assign random values to slot.
 	public void spin(){
 		
 		Random rand = new Random(); 
 		int newNumber;
-		SlotsSymbols[] newSlot = new SlotsSymbols[3];
 
 	
 		for(int i = 0; i < 3; i++)
@@ -77,52 +62,53 @@ public class Slots extends Game {
 			
 			if(newNumber == 0)
 			{
-				newSlot[i] = SlotsSymbols.BAR;
+				this.slot[i] = SlotsSymbols.BAR;
 			}
 			
 			if(newNumber == 1)
 			{
-				newSlot[i] = SlotsSymbols.BELL;
+				this.slot[i] = SlotsSymbols.BELL;
 			}
 			
 			if(newNumber == 2)
 			{
-				newSlot[i] = SlotsSymbols.CHERRY;
+				this.slot[i] = SlotsSymbols.CHERRY;
 			}
 			
 			if(newNumber == 3)
 			{
-				newSlot[i] = SlotsSymbols.GRAPES;
+				this.slot[i] = SlotsSymbols.GRAPES;
 			}
 			
 			if(newNumber == 4)
 			{
-				newSlot[i] = SlotsSymbols.LIME;
+				this.slot[i] = SlotsSymbols.LIME;
 			}
 			
 			if(newNumber == 5)
 			{
-				newSlot[i] = SlotsSymbols.ORANGE;
+				this.slot[i] = SlotsSymbols.ORANGE;
 			}
 			
 			if(newNumber == 6)
 			{
-				newSlot[i] = SlotsSymbols.PLUM;
+				this.slot[i] = SlotsSymbols.PLUM;
 			}
 			
 			if(newNumber == 7)
 			{
-				newSlot[i] = SlotsSymbols.SEVEN;
+				this.slot[i] = SlotsSymbols.SEVEN;
 			}	
 			
 			if(newNumber == 8)
 			{
-				newSlot[i] = SlotsSymbols.WATERMELON;
+				this.slot[i] = SlotsSymbols.WATERMELON;
 			}	
 						
 		}
 		
-		this.setSlot(newSlot);	
 	}
-}
 	
+
+	
+}

@@ -17,45 +17,47 @@ public class HandComperator {
 			//Get each player's best hand
 			playerHands.add(getBestPossible(community,player));
 		}
-		//TODO:  Figure out how to return a player instead of a hand
-		return getPlayerFromHand(players,getBestHand(playerHands));
+		Hand bestHand=getBestHand(playerHands);
+		System.out.println("Winning player number: "+bestHand.getOwner());
+		return players.get(bestHand.getOwner());
 	}
+	
+	private Hand makePossibleHand(ArrayList<Card> community,Player player,int pos1,int pos2){
+		//Set up the possible hand.
+		Hand hand=new Hand(community,player.getSeatNum());
+		//Inject the player's cards at their position. (If -1, the card isn't used.)
+		if(pos1>=0){
+			hand.getCards().remove(pos1);
+			hand.getCards().add(pos1,player.getHand().getCard(0));
+		}
+		if(pos2>=0){
+			hand.getCards().remove(pos2);
+			hand.getCards().add(pos2,player.getHand().getCard(1));
+		}
+		return hand;
+	}
+	
 	//Find all combinations of the community cards and the player's hand.
-	private ArrayList<Hand> getAllPossible(Hand community,Player player){
-		//Be ready to look at all hand possibilities
-		ArrayList<Hand> allHands = new ArrayList<Hand>();
-		//Look at each card in the player's hand
-		for(Card playerCard : player.getHand().getCards()){
-			//Look at every card in the community
-			for(int posNum=0; posNum<community.getCards().size(); posNum++){
-				//Set up the possible hand
-				Hand hand=new Hand();
-				hand.getCards().addAll(community.getCards());
-				//Inject the player's hand at the position.
-				hand.getCards().add(posNum,playerCard);
-				allHands.add(hand);
+	private Hand getBestPossible(Hand community,Player player){
+		//This will be replaced with better possibilities and returned at the end.
+		Hand bestHand = new Hand(community.getCards());
+		//Try all possible positions of the first card in player's hand.
+		for(int pos1=-1; pos1<community.getNumCards(); pos1++){
+			//try all possible positions of the second card in player's hand.
+			for(int pos2=-1; pos2<community.getNumCards(); pos2++){
+				Hand hand=makePossibleHand(community.getCards(),player,pos1,pos2);
+				//See if this possibility is better than the previous best.
+				//System.out.println("---Player "+player.getSeatNum()+" has possible "+hand.parseHandType()+": "+hand.toString());
+				if(bestHand.compareTo(hand)<0)
+					bestHand=hand;
 			}
 		}
-		return allHands;
+		return bestHand;
 	}
-	//Get all possible hands, and return the best one.
-	private Hand getBestPossible(Hand community,Player player){
-		ArrayList<Hand> allPossible = getAllPossible(community,player);
-		Collections.sort(allPossible);
-		return allPossible.get(0);
-	}
+	
 	//Get the best hand out of a list
 	private Hand getBestHand(ArrayList<Hand> hands){
+		System.out.println("Best hand:  "+Collections.max(hands).toString()+", which is a "+Collections.max(hands).parseHandType());
 		return Collections.max(hands);
-	}
-	//This is unfortunately necessary, because the collections needs a collection of hands, not players.
-	//The hands must be set apart, organized, and then the player must be derived later.
-	private Player getPlayerFromHand(ArrayList<Player> players,Hand hand){
-		for(Player player : players){
-			if (player.getHand() == hand){
-				return player;
-			}
-		}
-		return null;
 	}
 }
