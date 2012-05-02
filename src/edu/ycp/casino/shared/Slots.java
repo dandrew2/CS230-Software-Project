@@ -1,20 +1,19 @@
 package edu.ycp.casino.shared;
+
 import java.util.Random; 
 
 
 public class Slots extends Game {
 	
 	private SlotsSymbols[] slot = new SlotsSymbols[3];
-	private int money = 1000; 
-	private int bet;
+	private int money;
+	public int bet;
+	
 	public Slots()
 	{
 		this.slot = new SlotsSymbols[3];
 		
-		for(int i = 0; i < 3; i++) //Initialize slot
-		{
-			slot[i] = SlotsSymbols.WATERMELON;
-		}
+		this.money = 1000;
 	}
 	
 	
@@ -28,7 +27,9 @@ public class Slots extends Game {
 	//Setter method
 	public void setSlot(SlotsSymbols[] slot){
 	
-	this.slot = slot;
+		this.slot = slot;
+		setChanged();
+		notifyObservers();
 	}
 	
 	
@@ -49,12 +50,25 @@ public class Slots extends Game {
 		}
 	}
 	
+	public int getMoney()
+	{
+		return this.money;
+	}
+	
+	public void setMoney(int m)
+	{
+		this.money = m;
+		setChanged();
+		notifyObservers();
+	}
+	
 	
 	//Method to assign random values to slot.
 	public void spin(){
 		
 		Random rand = new Random(); 
 		int newNumber;
+		SlotsSymbols[] newSlot = new SlotsSymbols[3];
 
 	
 		for(int i = 0; i < 3; i++)
@@ -63,76 +77,52 @@ public class Slots extends Game {
 			
 			if(newNumber == 0)
 			{
-				this.slot[i] = SlotsSymbols.BAR;
+				newSlot[i] = SlotsSymbols.BAR;
 			}
 			
 			if(newNumber == 1)
 			{
-				this.slot[i] = SlotsSymbols.BELL;
+				newSlot[i] = SlotsSymbols.BELL;
 			}
 			
 			if(newNumber == 2)
 			{
-				this.slot[i] = SlotsSymbols.CHERRY;
+				newSlot[i] = SlotsSymbols.CHERRY;
 			}
 			
 			if(newNumber == 3)
 			{
-				this.slot[i] = SlotsSymbols.GRAPES;
+				newSlot[i] = SlotsSymbols.GRAPES;
 			}
 			
 			if(newNumber == 4)
 			{
-				this.slot[i] = SlotsSymbols.LIME;
+				newSlot[i] = SlotsSymbols.LIME;
 			}
 			
 			if(newNumber == 5)
 			{
-				this.slot[i] = SlotsSymbols.ORANGE;
+				newSlot[i] = SlotsSymbols.ORANGE;
 			}
 			
 			if(newNumber == 6)
 			{
-				this.slot[i] = SlotsSymbols.PLUM;
+				newSlot[i] = SlotsSymbols.PLUM;
 			}
 			
 			if(newNumber == 7)
 			{
-				this.slot[i] = SlotsSymbols.SEVEN;
+				newSlot[i] = SlotsSymbols.SEVEN;
 			}	
 			
 			if(newNumber == 8)
 			{
-				this.slot[i] = SlotsSymbols.WATERMELON;
+				newSlot[i] = SlotsSymbols.WATERMELON;
 			}	
 						
 		}
 		
+		this.setSlot(newSlot);	
 	}
-
-
-	public int getMoney() {
-		
-		return this.money;
-	}
-
-
-	public void setBet(int m) {
-		this.bet = m;
-	}
-
-
-	public int getBet() {
-
-		return this.bet;
-	}
-
-
-	public void setMoney(int i) {
-		this.money = i;
-		
-	}
-	
-	
-	
 }
+	

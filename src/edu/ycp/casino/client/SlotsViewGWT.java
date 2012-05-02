@@ -99,8 +99,6 @@ public class SlotsViewGWT extends Composite implements Observer {
 	@Override
 	public void update(Observable obj, Object hint) {
 		// TODO Auto-generated method stub
-		System.out.println("Test2");
-		
 		labelDisplaySlot1.setText(model.getSlot()[0].toString());
 		labelDisplaySlot2.setText(model.getSlot()[1].toString());
 		labelDisplaySlot3.setText(model.getSlot()[2].toString());
@@ -111,9 +109,7 @@ public class SlotsViewGWT extends Composite implements Observer {
 	public void runClick()
 	{
 		controller.assignPot(Integer.parseInt(textBoxBetText.getText()));
-		System.out.println("Test0");
 		controller.spinHandler();
-		this.update(model, null);
 	}
 	
 	
