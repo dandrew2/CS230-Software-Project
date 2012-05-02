@@ -1,5 +1,5 @@
 package edu.ycp.casino.client;
 
-public interface GameViewCallabck {
+public interface GameViewCallback {
 	public void chooseMainMenu();
 }

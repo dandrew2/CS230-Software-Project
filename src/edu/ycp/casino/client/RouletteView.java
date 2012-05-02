@@ -17,6 +17,8 @@ public class RouletteView extends Composite{
 	private Canvas canvas;
 	private Context2d context;
 	
+	private GameViewCallback callback;
+	
 	public RouletteView() {
 		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -64,6 +66,10 @@ public class RouletteView extends Composite{
 		absolutePanel.add(canvas, 300, 10);
 		
 		context = canvas.getContext2d();
+	}
+	
+	public void setCallback(GameViewCallback callback) {
+		this.callback = callback;
 	}
 	
 	public void drawOnCanvas() {

@@ -11,9 +11,7 @@ import edu.ycp.casino.shared.SlotsController;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class Casino implements EntryPoint, MainMenuEvents {
-	
-	private static boolean SHOW_SLOTS = true;
+public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	
 	private MainMenuGWT mainMenu;
 	private Widget currentView;
@@ -24,29 +22,7 @@ public class Casino implements EntryPoint, MainMenuEvents {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		/*
-		if (SHOW_SLOTS) {
-			Slots model = new Slots();
-			SlotsController controller = new SlotsController();
-			SlotsViewGWT slotsView = new SlotsViewGWT();
-			
-			slotsView.setModel(model);
-			controller.setModel(model);
-			controller.setView(slotsView);
-			slotsView.setController(controller);
-			model.spin();
-			
-			slotsView.update(model, null);
-			
-			RootLayoutPanel.get().add(slotsView);
-		} else {
-			RouletteView rouletteView = new RouletteView();
-			
-			RootLayoutPanel.get().add(rouletteView);
-			
-			rouletteView.drawOnCanvas();
-		}
-		*/
+
 		mainMenu = new MainMenuGWT();
 		mainMenu.setCallback(this);
 		
@@ -56,6 +32,11 @@ public class Casino implements EntryPoint, MainMenuEvents {
 		selectView(mainMenu);
 	}
 	
+	
+	
+	
+	
+	//Methods to set up the 4 various MVC GUI's for games
 	private void initSlotsView() {
 		Slots model = new Slots();
 		SlotsController controller = new SlotsController();
@@ -65,6 +46,7 @@ public class Casino implements EntryPoint, MainMenuEvents {
 		controller.setModel(model);
 		controller.setView(slotsView);
 		slotsView.setController(controller);
+		slotsView.setCallback(this);
 		model.spin();
 		
 		slotsView.update(model, null);
@@ -78,6 +60,10 @@ public class Casino implements EntryPoint, MainMenuEvents {
 		rouletteView.drawOnCanvas();
 	}
 
+	
+	
+	
+	//Method to change view currently being displayed
 	private void selectView(Widget view) {
 		if (currentView != null) {
 			RootLayoutPanel.get().remove(currentView);
@@ -106,5 +92,12 @@ public class Casino implements EntryPoint, MainMenuEvents {
 	public void blackjackChosen() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void chooseMainMenu() {
+		// TODO Auto-generated method stub
+		selectView(mainMenu);
 	}
 }
