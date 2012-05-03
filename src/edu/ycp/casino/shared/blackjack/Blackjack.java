@@ -9,18 +9,17 @@ public class Blackjack extends Game{
 	private Dealer dealer;
 	private Player master;//master is dealer
 	private int pot; //money reward
+	private int wallet;
 	public Blackjack(){
 		player = new Player();
+		master = new Player();
 		dealer = new Dealer();
 	}
 
 	//when player hits or stays
 	public void play(){
 		//get players bet
-		pot = player.getBet();//take away if lose
-		//player turn
-		dealer.dealTo(player);
-		dealer.dealTo(player);
+		startGame(player);
 		//player should have two cards by now
 		while (checkStay(false)){
 			playerTurn(player);//just deal
@@ -30,7 +29,18 @@ public class Blackjack extends Game{
 		checkOut(player,master,pot);
 		player.addBalance(pot);
 	}
+	
+	//first part of the game to get bet and deal initial hand
+	public void startGame(Player p){
+		p.getBet();
+		if (p.getHand().getNumCards()<2){
+			dealer.dealTo(p);
+			dealer.dealTo(p);
+		}
+		else{
 
+		}
+	}
 	//get hit
 	public boolean checkHit(boolean hit){
 		return hit;
@@ -43,23 +53,21 @@ public class Blackjack extends Game{
 	//get player hand
 	public void playerTurn(Player p){
 		//hit or stay phrase
-		
+
 		//if hand reaches 21
 		if (p.getHand().getBJHandValue() == 21){
 			checkStay(true);
 		}
 		//if bust or over hand value
-		if (p.getHand().getBJHandValue() > 21){
+		else if (p.getHand().getBJHandValue() > 21){
 			checkStay(true);
 		}
 		//when player hits
-		if (checkHit(false)||checkStay(true)){
-			//nothing happens
-		}
 		else if (checkHit(true)){
 			//dealer deal to hitter
 			dealer.dealTo(p);
 		}
+		checkHit(false);//reset the hit
 	}
 
 	//dealers hand
@@ -163,5 +171,14 @@ public class Blackjack extends Game{
 	public Player getPlayer(){
 		return player;
 	}
+	//get dealer as a player
+	public Player getDealer(){
+		return master;
+	}
 
 }
+//note to self
+//changes to shuffle due to GWT
+//changed in classes:
+//Deck class in method shuffle
+//Hand class in method shuffle

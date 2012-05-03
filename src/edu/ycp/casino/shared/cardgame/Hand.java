@@ -2,6 +2,8 @@ package edu.ycp.casino.shared.cardgame;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 
 public class Hand implements Comparable<Hand>{
@@ -63,9 +65,21 @@ public class Hand implements Comparable<Hand>{
     }
     
     public void shuffle() {
-            Collections.shuffle(this.cards);
+            //Collections.shuffle(this.cards);
+            shuffleCard(this.cards);
     }
-    
+	//swap method for shuffle
+	public void shuffleswap(ArrayList<Card>cards, int x , int y){
+		Card temp = cards.get(x);
+		cards.set(x, cards.get(y));
+		cards.set(y, temp);
+	}
+	public void shuffleCard(ArrayList<Card>cards){
+		Random rand = new Random();
+		for (int i = cards.size(); i>1 ;i--){
+			shuffleswap(cards,i-1,rand.nextInt(i));
+		}
+	}
     public void sort(){
     	Collections.sort(this.cards);
     }
