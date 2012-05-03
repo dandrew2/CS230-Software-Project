@@ -8,8 +8,7 @@ public class RouletteController {
 	private RouletteView view; 
 	
 	public RouletteController(){
-		this.model = new Roulette(); 
-		this.view = new RouletteView(); 
+		
 	}
 	
 	public void setModel(Roulette model){
@@ -20,12 +19,24 @@ public class RouletteController {
 		this.view = view; 
 	}
 	
-	public int spinHandler(){
-		int val = model.spinWheel(); 
-		return val; 
+	public void spinHandler(){
+		model.spinWheel();
+		view.update(model, null); 
 	}
 	
-	public void placeBetHandler(int amt, BetType b){
-		model.placeBet(amt, b); 
+	public void betTypeHandler(BetType b){
+		model.setBetType(b);
+		view.update(model, null); 
+	}
+	public void placeBetHandler(int amt){
+		model.placeBet(amt); 
+	}
+	
+	public int getWheelVal(){
+		return model.getWheelVal(); 
+	}
+	
+	public Roulette getModel(){
+		return model; 
 	}
 }

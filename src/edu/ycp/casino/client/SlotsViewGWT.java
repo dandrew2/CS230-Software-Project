@@ -96,9 +96,9 @@ public class SlotsViewGWT extends Composite implements Observer {
 		layoutPanel.setWidgetTopHeight(lblCurrentMoneyDisplay, 179.0, Unit.PX, 18.0, Unit.PX);
 	}
 	
-	@Override
+	
 	public void update(Observable obj, Object hint) {
-		// TODO Auto-generated method stub
+		
 		labelDisplaySlot1.setText(model.getSlot()[0].toString());
 		labelDisplaySlot2.setText(model.getSlot()[1].toString());
 		labelDisplaySlot3.setText(model.getSlot()[2].toString());
