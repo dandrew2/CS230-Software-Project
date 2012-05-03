@@ -2,7 +2,6 @@ package edu.ycp.casino.client;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.InlineLabel;
 
@@ -16,9 +15,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.event.dom.client.DoubleClickHandler;
-import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.user.client.ui.Image;
 
 public class SlotsViewGWT extends Composite implements Observer, GameViewCallback {
@@ -127,9 +125,9 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 			public void onClick(ClickEvent event) {
 				runMainMenuClick();
 			}
-
 			
 		});
+		
 		layoutPanel.add(btnBackToMain);
 		layoutPanel.setWidgetLeftWidth(btnBackToMain, 48.0, Unit.PX, 129.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(btnBackToMain, 422.0, Unit.PX, 30.0, Unit.PX);
@@ -146,10 +144,10 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 		labelDisplaySlot2.setText(model.getSlot()[1].toString());
 		labelDisplaySlot3.setText(model.getSlot()[2].toString());
 		
-		setImage(imageSlot1,model.getSlot()[0]);
+		setImage(imageSlot1,model.getSlot()[0]);		
 		setImage(imageSlot2,model.getSlot()[1]);
-		setImage(imageSlot3,model.getSlot()[2]);
-			
+		setImage(imageSlot3,model.getSlot()[2]);	
+		
 		lblCurrentMoneyDisplay.setText(Integer.toString(model.getPlayer().getWallet().getBalance()));
 	}
 	
@@ -227,13 +225,12 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 	}
 
 	@Override
-	public void chooseMainMenu() {
-		// TODO Auto-generated method stub
-		
+	public void chooseMainMenu() {		
 	}
 	
 	public TextBox getBettextBox()
 	{
 		return this.textBoxBetText;
 	}
+
 }
