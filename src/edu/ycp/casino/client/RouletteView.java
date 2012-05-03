@@ -39,7 +39,7 @@ public class RouletteView extends Composite implements Observer{
 	private TextBox betTypeText;
 	private Button spinWheel;
 	private Image image;
-	private Animation wheel; 
+ 
 
 
 	public RouletteView() {
@@ -51,7 +51,7 @@ public class RouletteView extends Composite implements Observer{
 		absolutePanel.setSize("817px", "552px");
 
 
-
+		
 		betAmount = new TextBox();
 		absolutePanel.add(betAmount, 22, 90);
 		betAmount.setSize("107px", "18px");
@@ -127,7 +127,10 @@ public class RouletteView extends Composite implements Observer{
 	}
 
 	public void runClick(){
-		controller.spinHandler(); 
+		controller.placeBetHandler(Integer.parseInt(betAmount.getText()));
+		betAmount.setText(""); 
+		controller.spinHandler();
+		
 	}
 	public void setModel(Roulette model) {
 		this.model = model; 
@@ -141,16 +144,19 @@ public class RouletteView extends Composite implements Observer{
 
 	public void update(Observable o, Object hint){
 		System.out.println("Updated!"); 
-		wheelNum.setText("" + controller.getModel().getWheelVal());
-		BetType b = controller.getModel().getBetType(); 
+		wheelNum.setText("" + model.getWheelVal());
+		BetType b = model.getBetType(); 
 
 		if(b != null){
 			betTypeText.setText(b.toString());
 		}
+		
+		walletText.setText("" + model.getPlayer().getBalance()); 
 
 
 	}
-
+	
+	
 	public void drawOnCanvas() {
 
 	}
@@ -196,6 +202,12 @@ public class RouletteView extends Composite implements Observer{
 			if(y > 382 && y < 446){
 				b = BetType.LAST_HALF; 
 			}
+		}
+		
+		if(x > 120 && x < 289){
+			if(y > 55 && y < 455){
+				b = BetType.NUM_MATCH; 
+			}	
 		}
 
 		return b; 

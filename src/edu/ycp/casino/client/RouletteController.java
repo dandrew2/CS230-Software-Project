@@ -1,11 +1,14 @@
 package edu.ycp.casino.client;
 
+
+
 import edu.ycp.casino.shared.BetType;
 import edu.ycp.casino.shared.Roulette;
 
 public class RouletteController {
 	private Roulette model; 
-	private RouletteView view; 
+	private RouletteView view;
+
 	
 	public RouletteController(){
 		
@@ -20,8 +23,17 @@ public class RouletteController {
 	}
 	
 	public void spinHandler(){
+		
 		model.spinWheel();
+		int bet = model.getPot();
+		 
+		if(model.checkWin() == true){
+			model.getPlayer().addBalance(model.getPayout(bet)); 
+			
+		}
 		view.update(model, null); 
+		model.clearPot(); 
+		bet = 0; 
 	}
 	
 	public void betTypeHandler(BetType b){

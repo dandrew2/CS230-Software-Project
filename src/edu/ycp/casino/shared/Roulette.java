@@ -3,9 +3,6 @@ package edu.ycp.casino.shared;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner; 
-
-import com.sun.org.apache.xalan.internal.xsltc.util.IntegerArray;
 
 import edu.ycp.casino.shared.cardgame.poker.Pot;
 
@@ -13,12 +10,14 @@ import edu.ycp.casino.shared.cardgame.poker.Pot;
 public class Roulette extends Game {
 	private static int [] wheel; 
 	private static Random generator;
-	private int wheelVal; 
+	private int wheelVal;
+	private int betNumber; 
 	private Pot p;
 	private BetType betType; 
 	private Player player;
 
-	private static ArrayList<Integer> red = (ArrayList<Integer>) Arrays.asList(1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36); 
+	private static ArrayList<Integer> red =
+			new ArrayList<Integer>(Arrays.asList(new Integer[]{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36})); 
 
 
 
@@ -31,21 +30,29 @@ public class Roulette extends Game {
 		FIRST, SECOND, THIRD, NO_COLUMN; 
 	}
 
-
+	
 	public Roulette(){
 		wheel = new int[38]; 
 		p = new Pot(); 
 		generator = new Random(); 
 		for(int i = 0; i < 37; i++){
 			wheel[i] =  i;
-		}	
+		}
+		
+		player = new Player(); 
 	}
 
-
+	public int getPot(){
+		return p.getAmount();  
+	}
+	
+	public void clearPot(){
+		p.takeAll(); 
+	}
 	public Player getPlayer(){
 		return player; 
 	}
-
+	
 	public void spinWheel(){
 		wheelVal = generator.nextInt(37);
 	}
@@ -53,7 +60,14 @@ public class Roulette extends Game {
 	public int getWheelVal(){
 		return wheelVal; 
 	}
-
+	
+	public int getBetVal(){
+		return betNumber; 
+	}
+	
+	public void setBetVal(int val){
+		betNumber = val;  
+	}
 
 	public SlotColor getColor(int val){
 		if(red.contains(val)){
@@ -97,24 +111,39 @@ public class Roulette extends Game {
 	}
 
 	public void placeBet(int amt){
-		p.add(amt); 
+		p.add(amt);
+		player.getWallet().takeBet(amt); 
+		
 	}
 
 
 
-	public Boolean checkWin(int betNumber, int wheelNumber){
+	public Boolean checkWin(){
 		Boolean win = false;
-		SlotColor color = getColor(wheelNumber); 
+		SlotColor color = getColor(wheelVal);
+		Column column = getColumn(wheelVal); 
 
-		if(betType == BetType.NUM_MATCH && betNumber == wheelNumber){
+		if(betType == BetType.NUM_MATCH && betNumber == wheelVal){
 			win = true; 
 		}
-		
+
 		if(betType == BetType.FIRST_HALF && betNumber < 19 && betNumber != 0){
 			win = true; 
 		}
-		
+
 		if(betType == BetType.LAST_HALF && betNumber > 18){
+			win = true; 
+		}
+
+		if(betType == BetType.FIRST_COLUMN && column == Column.FIRST){
+			win = true; 
+		}
+
+		if(betType == BetType.SECOND_COLUMN && column == Column.SECOND){
+			win = true; 
+		}
+
+		if(betType == BetType.THIRD_COLUMN && column == Column.THIRD){
 			win = true; 
 		}
 
@@ -126,22 +155,26 @@ public class Roulette extends Game {
 			win = true; 
 		}
 
-		if(betType== BetType.FIRST_TWELVE && wheelNumber < 13){
+		if(betType== BetType.FIRST_TWELVE && wheelVal < 13){
 			win = true; 
 		}
 
 		else{
-			if(betType == BetType.MIDDLE_TWELVE && wheelNumber < 25){
+			if(betType == BetType.MIDDLE_TWELVE && wheelVal < 25){
 				win = true; 
 			}
 			else {
-				if(betType == BetType.LAST_TWELVE && wheelNumber < 37){
+				if(betType == BetType.LAST_TWELVE && wheelVal < 37){
 					win = true; 
 				}
 			}
 		}
 
-		if(betType == BetType.ZERO && wheelNumber == 0){
+		if(betType == BetType.ODD && wheelVal % 2 == 1){
+			win = true; 
+		}
+
+		if(betType == BetType.EVEN && wheelVal % 2 == 0){
 			win = true; 
 		}
 
@@ -158,8 +191,26 @@ public class Roulette extends Game {
 		if(betType == BetType.BLACK || betType == BetType.RED){
 			payout = bet*2; 
 		}
+		
+		if(betType == BetType.ODD || betType == BetType.EVEN){
+			payout = bet*2; 
+		}
+		
+		if(betType == BetType.BLACK || betType == BetType.RED){
+			payout = bet*2; 
+		}
+		
+		if(betType == BetType.FIRST_HALF || betType == BetType.LAST_HALF){
+			payout = bet*2; 
+		}
 
 		if(betType == BetType.FIRST_TWELVE || betType == BetType.MIDDLE_TWELVE || betType == BetType.LAST_TWELVE){
+
+			payout = bet*3; 
+		}
+
+		if(betType == BetType.FIRST_COLUMN || betType == BetType.SECOND_COLUMN || betType == BetType.THIRD_COLUMN){
+
 			payout = bet*3; 
 		}
 
@@ -233,4 +284,6 @@ public class Roulette extends Game {
 			}
 		}*/
 	}
+
+	
 }

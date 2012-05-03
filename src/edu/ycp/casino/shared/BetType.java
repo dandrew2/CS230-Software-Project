@@ -6,7 +6,6 @@ public enum BetType {
 	FIRST_TWELVE,
 	MIDDLE_TWELVE,
 	LAST_TWELVE,
-	ZERO,
 	EVEN,
 	ODD,
 	FIRST_COLUMN,
@@ -33,9 +32,6 @@ public enum BetType {
 		}
 		else if(this == LAST_TWELVE){
 			s =  "Last 12"; 
-		}
-		else if(this == ZERO){
-			s =  "Zero"; 
 		}
 		else if(this == NUM_MATCH){
 			s =  "Match Number"; 
