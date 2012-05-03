@@ -6,14 +6,12 @@ import java.util.Random;
 public class Slots extends Game {
 	
 	private SlotsSymbols[] slot = new SlotsSymbols[3];
-	private int money;
-	public int bet;
+	private Player player;
+	
 	
 	public Slots()
 	{
 		this.slot = new SlotsSymbols[3];
-		
-		this.money = 1000;
 	}
 	
 	
@@ -50,16 +48,14 @@ public class Slots extends Game {
 		}
 	}
 	
-	public int getMoney()
+	public Player getPlayer()
 	{
-		return this.money;
+		return this.player;
 	}
 	
-	public void setMoney(int m)
+	public void setPlayer(Player p)
 	{
-		this.money = m;
-		setChanged();
-		notifyObservers();
+		this.player = p;
 	}
 	
 	

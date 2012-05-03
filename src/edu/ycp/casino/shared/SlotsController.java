@@ -5,32 +5,31 @@ import edu.ycp.casino.client.SlotsViewGWT;
 
 public class SlotsController {
 	
-		Slots model;
-		SlotsViewGWT view;
+		private Slots model;
+		private SlotsViewGWT view;
 		
 		public SlotsController()
 		{
 		}
-		
-		public void assignPot(int m)
-		{
-			model.bet = m;
-		}
-	
 	
 		public void spinHandler()
 		{
+			int bet = Integer.parseInt(view.getBettextBox().getText());
+			
 			model.spin();
 			
 			if(model.checkWin() == true)
 			{
-				model.setMoney(model.getMoney() + model.bet);
+				model.getPlayer().getWallet().setBalance(model.getPlayer().getWallet().getBalance() + bet);
 			}
 			
 			if(model.checkWin() == false)
 			{
-				model.setMoney(model.getMoney() - model.bet);
+				model.getPlayer().getWallet().setBalance(model.getPlayer().getWallet().getBalance() - bet);
 			}
+			
+			model.setChanged();
+			model.notifyObservers();
 		}
 		
 		public void setModel(Slots model)

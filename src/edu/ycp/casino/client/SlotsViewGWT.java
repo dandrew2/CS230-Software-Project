@@ -43,7 +43,7 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 		LayoutPanel layoutPanel = new LayoutPanel();
 		
 		initWidget(layoutPanel);
-		layoutPanel.setSize("613px", "462px");
+		layoutPanel.setSize("700px", "500px");
 		
 		InlineLabel lblSlot1 = new InlineLabel("Slot 1:");
 		layoutPanel.add(lblSlot1);
@@ -91,6 +91,7 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 		layoutPanel.setWidgetTopHeight(lblCurrentBet, 345.0, Unit.PX, 18.0, Unit.PX);
 		
 		textBoxBetText = new TextBox();
+		textBoxBetText.setText("10");
 		layoutPanel.add(textBoxBetText);
 		layoutPanel.setWidgetLeftWidth(textBoxBetText, 285.0, Unit.PX, 90.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(textBoxBetText, 377.0, Unit.PX, 30.0, Unit.PX);
@@ -105,18 +106,18 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 		layoutPanel.setWidgetLeftWidth(lblCurrentMoneyDisplay, 285.0, Unit.PX, 90.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(lblCurrentMoneyDisplay, 321.0, Unit.PX, 18.0, Unit.PX);
 		
-		imageSlot1 = new Image("Cherry.png");
+		imageSlot1 = new Image();
 		layoutPanel.add(imageSlot1);
 		imageSlot1.setSize("50", "50");
 		layoutPanel.setWidgetLeftWidth(imageSlot1, 40.0, Unit.PX, 90.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(imageSlot1, 151.0, Unit.PX, 75.0, Unit.PX);
 		
-		imageSlot2 = new Image("Watermelon.png");
+		imageSlot2 = new Image();
 		layoutPanel.add(imageSlot2);
 		layoutPanel.setWidgetLeftWidth(imageSlot2, 148.0, Unit.PX, 50.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(imageSlot2, 151.0, Unit.PX, 50.0, Unit.PX);
 		
-		imageSlot3 = new Image("Plum.png");
+		imageSlot3 = new Image();
 		layoutPanel.add(imageSlot3);
 		layoutPanel.setWidgetLeftWidth(imageSlot3, 260.0, Unit.PX, 61.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(imageSlot3, 151.0, Unit.PX, 62.0, Unit.PX);
@@ -140,7 +141,7 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 	
 	@Override
 	public void update(Observable obj, Object hint) {
-		// TODO Auto-generated method stub
+
 		labelDisplaySlot1.setText(model.getSlot()[0].toString());
 		labelDisplaySlot2.setText(model.getSlot()[1].toString());
 		labelDisplaySlot3.setText(model.getSlot()[2].toString());
@@ -149,12 +150,11 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 		setImage(imageSlot2,model.getSlot()[1]);
 		setImage(imageSlot3,model.getSlot()[2]);
 			
-		lblCurrentMoneyDisplay.setText(Integer.toString(model.getMoney()));
+		lblCurrentMoneyDisplay.setText(Integer.toString(model.getPlayer().getWallet().getBalance()));
 	}
 	
 	public void runClick()
 	{
-		controller.assignPot(Integer.parseInt(textBoxBetText.getText()));
 		controller.spinHandler();
 	}
 	
@@ -218,16 +218,22 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 		}
 	}
 
-	@Override
-	public void chooseMainMenu() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public void runMainMenuClick()
 	{
 		if (callback != null) {
 			callback.chooseMainMenu();
 		}
+	}
+
+	@Override
+	public void chooseMainMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public TextBox getBettextBox()
+	{
+		return this.textBoxBetText;
 	}
 }

@@ -19,6 +19,11 @@ public class Wallet {
 		return balance;
 	}
 	
+	public void setBalance(int b)
+	{
+		this.balance = b;
+	}
+	
 	public void takeBet(int x){
 		balance -= x;
 	}

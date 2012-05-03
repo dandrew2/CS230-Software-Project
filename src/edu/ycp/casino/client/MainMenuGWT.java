@@ -3,7 +3,6 @@ package edu.ycp.casino.client;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.LayoutPanel;
 
-import edu.ycp.casino.shared.MainMenuController;
 import edu.ycp.casino.shared.Observable;
 import edu.ycp.casino.shared.Observer;
 import com.google.gwt.user.client.ui.Label;
@@ -24,8 +23,6 @@ public class MainMenuGWT extends Composite implements Observer {
 	private Button btnPoker;
 	private Button btnBlackJack;
 	private Button btnRoulette;
-	
-	private MainMenuController controller;
 	
 	private MainMenuEvents callback;
 	
@@ -111,11 +108,6 @@ public class MainMenuGWT extends Composite implements Observer {
 		if (callback != null) {
 			callback.blackjackChosen();
 		}
-	}
-	
-	public void setController(MainMenuController mm)
-	{
-		this.controller = mm;
 	}
 	
 	@Override
