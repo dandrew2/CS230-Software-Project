@@ -19,7 +19,9 @@ public class BlackjackController {
 	public void assignPot(int bet){
 
 	}
-
+	public int getBet(){
+		return this.bet;
+	}
 	//wallet
 	public int currentWallet(int wallet){
 		bet = Integer.parseInt(view.getEnterBet().getText());
@@ -52,7 +54,7 @@ public class BlackjackController {
 	}
 	//hit or add cards
 	public void hit(){
-		if (allow == true && hits < 4){
+		if (allow == true && model.getPlayer().getHand().getBJHandValue()<21){
 			model.playerTurn(model.getPlayer());
 			model.checkHit(true);
 			hits++;

@@ -33,6 +33,7 @@ public class BlackjackViewGWT extends Composite implements Observer{
 	private TextBox wallet;
 	private TextBox dealerValue;
 	private TextBox playstats;
+	private TextBox rewards;
 	//buttons 
 	private Button btnStart;
 	private Button buttonHit;
@@ -55,7 +56,7 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		LayoutPanel layoutPanel = new LayoutPanel();
 		initWidget(layoutPanel);
 		layoutPanel.setSize("800px", "600px");
-		
+
 		Image Background = new Image("feltBg.jpg");
 		layoutPanel.add(Background);
 		Background.setSize("800", "600");
@@ -133,7 +134,7 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		txtbxWallet.setText("Wallet :");
 		layoutPanel.add(txtbxWallet);
 		layoutPanel.setWidgetLeftWidth(txtbxWallet, 11.0, Unit.PX, 92.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(txtbxWallet, 393.0, Unit.PX, 34.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(txtbxWallet, 428.0, Unit.PX, 34.0, Unit.PX);
 
 		//current money left
 		wallet = new TextBox();
@@ -142,7 +143,7 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		layoutPanel.add(wallet);
 		wallet.setSize("75", "35");
 		layoutPanel.setWidgetLeftWidth(wallet, 89.0, Unit.PX, 50.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(wallet, 393.0, Unit.PX, 34.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(wallet, 428.0, Unit.PX, 34.0, Unit.PX);
 
 		//input bet box
 		setEnterBet(new TextBox());
@@ -234,6 +235,14 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		layoutPanel.setWidgetLeftWidth(playstats, 273.0, Unit.PX, 173.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(playstats, 237.0, Unit.PX, 34.0, Unit.PX);
 
+		//show how much wins or losses
+		rewards = new TextBox();
+		rewards.setReadOnly(true);
+		layoutPanel.add(rewards);
+		layoutPanel.setWidgetLeftWidth(rewards, 11.0, Unit.PX, 129.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(rewards, 388.0, Unit.PX, 34.0, Unit.PX);
+		rewards.setVisible(false);
+		
 		//inital show of hands
 		backImage(image_c1);
 		backImage(image_c2);
@@ -247,6 +256,8 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		resetImage(image_d4);
 		resetImage(image_d5);
 
+
+
 	}
 	public void setController(BlackjackController controller){
 		this.controller = controller;
@@ -256,6 +267,8 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		controller.reset();
 		controller.assignPot(Integer.parseInt(getEnterBet().getText()));
 		controller.start();
+		
+		rewards.setVisible(false);
 		//check for tie or blackjack
 		if (model.checkBJ(model.getPlayer())==true){
 			controller.stay();
@@ -265,6 +278,8 @@ public class BlackjackViewGWT extends Composite implements Observer{
 			}
 			else {
 				playstats.setText("Blackjack!!");
+				rewards.setVisible(true);
+				rewards.setText("  You Win :  "+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
 				setDealerImage();
 			}
 		}
@@ -292,18 +307,21 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		else{
 			dealerValue.setText(model.getDealer().getHand().getBJCardValue(model.getDealer().getHand().getCard(0))+"?");
 		}
+		
 	}
 	//hit and stay
 	public void hit(){
-		//if bust
+	//if bust
+		controller.hit();
 		if (model.checkBust(model.getPlayer())==true){
-			controller.stay();
-			playstats.setText("You Bust!!");
-			setDealerImage();
+				controller.stay();
+				playstats.setText("You Bust!!");
+				rewards.setVisible(true);
+				rewards.setText("  You lose:  "+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
+				setDealerImage();
+				stay();
 		}
-		else{
-			controller.hit();	
-		}
+		
 		//images for next few cards
 		if (controller.hits()==1){
 			image_c3.setVisible(true);
@@ -321,21 +339,33 @@ public class BlackjackViewGWT extends Composite implements Observer{
 			image_c6.setVisible(true);
 			setImage(image_c6, model.getPlayer().getHand().getCard(5));
 		}
+	
 		handvalue.setText(""+model.getPlayer().getHand().getBJHandValue());
 	}
 	public void stay(){
 		controller.stay();
+		rewards.setVisible(true);
 		//check tie
-		if (model.checkTie(model.getPlayer(), model.getDealer())==true){
+		//if bust
+		if (model.checkBust(model.getPlayer())==true){
+			controller.stay();
+			playstats.setText("You Bust!!");
+			rewards.setText("  You lose:  "+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
+			setDealerImage();
+		}
+		else if (model.checkTie(model.getPlayer(), model.getDealer())==true){
 			playstats.setText("Push!!");
 		}
 		//check win or lost
 		else if (model.checkWin(model.getPlayer(), model.getDealer())==true){
 			playstats.setText("You Win!!");
+			rewards.setText("  You win :  "+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
 		}
 		else if(model.checkWin(model.getPlayer(), model.getDealer())==false){
 			playstats.setText("You Lose!!");
+			rewards.setText("  You lose:  "+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
 		}
+
 		//images for the dealers hands
 		setDealerImage();
 	}
