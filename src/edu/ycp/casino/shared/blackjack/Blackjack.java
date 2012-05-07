@@ -9,7 +9,7 @@ public class Blackjack extends Game{
 	private Dealer dealer;
 	private Player master;//master is dealer
 	private int pot; //money reward
-	private int wallet;
+	//private int wallet;
 	public Blackjack(){
 		player = new Player();
 		master = new Player();
@@ -29,7 +29,12 @@ public class Blackjack extends Game{
 		checkOut(player,master,pot);
 		player.addBalance(pot);
 	}
-	
+	//reset
+	public void reset(){
+		this.player = new Player();
+		this.master = new Player();
+		this.dealer = new Dealer();
+	}
 	//first part of the game to get bet and deal initial hand
 	public void startGame(Player p){
 		p.getBet();
@@ -71,6 +76,10 @@ public class Blackjack extends Game{
 	}
 
 	//dealers hand
+	public void dealerHand(Player p){
+		dealer.dealTo(p);
+		dealer.dealTo(p);
+	}
 	public void dealerTurn(Player p){
 		//dealer stop drawing after reaching 17 or higher
 		while (p.getHand().getBJHandValue()<17){
@@ -117,7 +126,10 @@ public class Blackjack extends Game{
 		if (p.getHand().getBJHandValue() > 21){
 			return false;
 		}
-
+		//if dealer bust
+		else if (d.getHand().getBJHandValue() > 21){
+			return true;
+		}
 		//if hand greater than other hand
 		else if (p.getHand().compareBJ(d.getHand()) == 1){
 			return true;
@@ -160,12 +172,13 @@ public class Blackjack extends Game{
 			//System.out.print("You Win!");
 			return bet;
 		}
-		else {
+		else if (checkWin(p,d) == false){
 			//player loses
 			//player.addBalance(-pot);
 			//System.out.print("You lose!");
 			return -bet;
 		}
+		return 0;
 	}
 	//get player
 	public Player getPlayer(){
@@ -177,8 +190,3 @@ public class Blackjack extends Game{
 	}
 
 }
-//note to self
-//changes to shuffle due to GWT
-//changed in classes:
-//Deck class in method shuffle
-//Hand class in method shuffle
