@@ -4,42 +4,29 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-<<<<<<< HEAD
 
 import edu.ycp.casino.client.MainMenuGWT.MainMenuEvents;
 import edu.ycp.casino.shared.Player;
 import edu.ycp.casino.shared.Roulette;
-=======
-import edu.ycp.casino.shared.Roulette;
->>>>>>> 464e889afa40002fdc9025a776ca1fb21c23d0bf
 import edu.ycp.casino.shared.Slots;
 import edu.ycp.casino.shared.SlotsController;
-import edu.ycp.casino.shared.blackjack.Blackjack;
-import edu.ycp.casino.shared.blackjack.BlackjackController;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	
-<<<<<<< HEAD
 
 	private MainMenuGWT mainMenu;
 	private Widget currentView;
-	
 	private SlotsViewGWT slotsView;
 	private RouletteView rouletteView;
-	private BlackjackViewGWT blackJackView;
 
-=======
-	private static boolean SHOW_SLOTS = false;
->>>>>>> 464e889afa40002fdc9025a776ca1fb21c23d0bf
 	
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-<<<<<<< HEAD
 
 		mainMenu = new MainMenuGWT();
 		mainMenu.setCallback(this);
@@ -47,7 +34,6 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		player.getWallet().setBalance(1500);
 		
 		initSlotsView(player);
-		initBlackJackView();
 		initRouletteView();
 		
 		selectView(mainMenu);
@@ -72,7 +58,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	}
 	
 	private void initRouletteView() {
-		rouletteView = new RouletteView();
+		RouletteView rouletteView = new RouletteView();
 		Roulette model = new Roulette();			
 		RouletteController controller = new RouletteController();	
 		
@@ -81,58 +67,12 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		controller.setView(rouletteView); 			
 		rouletteView.setController(controller);
 	}
-	
-	private void initBlackJackView()
-	{
-		Blackjack model = new Blackjack();
-		blackJackView = new BlackjackViewGWT();
-		BlackjackController controller = new BlackjackController();
-		
-		blackJackView.setModel(model);
-		controller.setModel(model);
-		controller.setView(blackJackView);
-		blackJackView.setController(controller);
-		blackJackView.update(model, null);
-	}
 
 	
 	//Method to change view currently being displayed
 	private void selectView(Widget view) {
 		if (currentView != null) {
 			RootLayoutPanel.get().remove(currentView);
-=======
-		if (SHOW_SLOTS) {
-			Slots model = new Slots();
-			SlotsController controller = new SlotsController();
-			SlotsViewGWT slotsView = new SlotsViewGWT();
-			
-			slotsView.setModel(model);
-			controller.setModel(model);
-			controller.setView(slotsView);
-			slotsView.setController(controller);
-			model.spin();
-			
-			slotsView.update(model, null);
-			
-			RootLayoutPanel.get().add(slotsView);
-		} else {
-			RouletteView rouletteView = new RouletteView();
-			Roulette model = new Roulette();
-			RouletteController controller = new RouletteController();
-			
-			rouletteView.setModel(model); 
-			controller.setModel(model);
-			controller.setView(rouletteView); 
-			rouletteView.setController(controller);
-			
-			
-		
-			
-			
-			RootLayoutPanel.get().add(rouletteView);
-			
-			//rouletteView.drawOnCanvas();
->>>>>>> 464e889afa40002fdc9025a776ca1fb21c23d0bf
 		}
 		RootLayoutPanel.get().add(view);
 		currentView = view;
@@ -157,7 +97,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 
 	@Override
 	public void blackjackChosen() {
-		selectView(blackJackView);
+		// TODO Auto-generated method stub
 	}
 
 	@Override
