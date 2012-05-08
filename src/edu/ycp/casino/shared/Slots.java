@@ -11,9 +11,6 @@ public class Slots extends Game {
 	
 	public Slots()
 	{
-		this.slot = new SlotsSymbols[3];
-
-
 
 		for(int i = 0; i < 3; i++) //Initialize slot
 		{
@@ -31,12 +28,11 @@ public class Slots extends Game {
 
 	//Setter method
 	public void setSlot(SlotsSymbols[] slot){
-	
+
 		this.slot = slot;
 		setChanged();
 		notifyObservers();
 
-		this.slot = slot;
 	}
 
 
@@ -76,7 +72,6 @@ public class Slots extends Game {
 		Random rand = new Random(); 
 		int newNumber;
 		SlotsSymbols[] newSlot = new SlotsSymbols[3];
-
 
 		for(int i = 0; i < 3; i++)
 		{
@@ -133,16 +128,5 @@ public class Slots extends Game {
 	}
 	
 
-
-	public void play(Player p)
-	{
-
-	}
-
-	//Method to print out slot to console.
-	public void printSlot()
-	{
-		System.out.println("Slot: " + this.slot[0].toString() + " " + this.slot[1].toString() + " " + this.slot[2].toString());
-	}
 
 }
