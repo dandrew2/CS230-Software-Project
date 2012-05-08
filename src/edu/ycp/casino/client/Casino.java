@@ -4,10 +4,14 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+<<<<<<< HEAD
 
 import edu.ycp.casino.client.MainMenuGWT.MainMenuEvents;
 import edu.ycp.casino.shared.Player;
 import edu.ycp.casino.shared.Roulette;
+=======
+import edu.ycp.casino.shared.Roulette;
+>>>>>>> 464e889afa40002fdc9025a776ca1fb21c23d0bf
 import edu.ycp.casino.shared.Slots;
 import edu.ycp.casino.shared.SlotsController;
 import edu.ycp.casino.shared.blackjack.Blackjack;
@@ -18,6 +22,7 @@ import edu.ycp.casino.shared.blackjack.BlackjackController;
  */
 public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	
+<<<<<<< HEAD
 
 	private MainMenuGWT mainMenu;
 	private Widget currentView;
@@ -26,11 +31,15 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	private RouletteView rouletteView;
 	private BlackjackViewGWT blackJackView;
 
+=======
+	private static boolean SHOW_SLOTS = false;
+>>>>>>> 464e889afa40002fdc9025a776ca1fb21c23d0bf
 	
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+<<<<<<< HEAD
 
 		mainMenu = new MainMenuGWT();
 		mainMenu.setCallback(this);
@@ -91,6 +100,39 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	private void selectView(Widget view) {
 		if (currentView != null) {
 			RootLayoutPanel.get().remove(currentView);
+=======
+		if (SHOW_SLOTS) {
+			Slots model = new Slots();
+			SlotsController controller = new SlotsController();
+			SlotsViewGWT slotsView = new SlotsViewGWT();
+			
+			slotsView.setModel(model);
+			controller.setModel(model);
+			controller.setView(slotsView);
+			slotsView.setController(controller);
+			model.spin();
+			
+			slotsView.update(model, null);
+			
+			RootLayoutPanel.get().add(slotsView);
+		} else {
+			RouletteView rouletteView = new RouletteView();
+			Roulette model = new Roulette();
+			RouletteController controller = new RouletteController();
+			
+			rouletteView.setModel(model); 
+			controller.setModel(model);
+			controller.setView(rouletteView); 
+			rouletteView.setController(controller);
+			
+			
+		
+			
+			
+			RootLayoutPanel.get().add(rouletteView);
+			
+			//rouletteView.drawOnCanvas();
+>>>>>>> 464e889afa40002fdc9025a776ca1fb21c23d0bf
 		}
 		RootLayoutPanel.get().add(view);
 		currentView = view;
