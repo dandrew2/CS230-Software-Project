@@ -10,6 +10,8 @@ import edu.ycp.casino.shared.Player;
 import edu.ycp.casino.shared.Roulette;
 import edu.ycp.casino.shared.Slots;
 import edu.ycp.casino.shared.SlotsController;
+import edu.ycp.casino.shared.blackjack.Blackjack;
+import edu.ycp.casino.shared.blackjack.BlackjackController;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -19,8 +21,10 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 
 	private MainMenuGWT mainMenu;
 	private Widget currentView;
+	
 	private SlotsViewGWT slotsView;
 	private RouletteView rouletteView;
+	private BlackjackViewGWT blackJackView;
 
 	
 	/**
@@ -34,6 +38,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		player.getWallet().setBalance(1500);
 		
 		initSlotsView(player);
+		initBlackJackView();
 		initRouletteView();
 		
 		selectView(mainMenu);
@@ -58,7 +63,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	}
 	
 	private void initRouletteView() {
-		RouletteView rouletteView = new RouletteView();
+		rouletteView = new RouletteView();
 		Roulette model = new Roulette();			
 		RouletteController controller = new RouletteController();	
 		
@@ -66,6 +71,19 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		controller.setModel(model);			
 		controller.setView(rouletteView); 			
 		rouletteView.setController(controller);
+	}
+	
+	private void initBlackJackView()
+	{
+		Blackjack model = new Blackjack();
+		blackJackView = new BlackjackViewGWT();
+		BlackjackController controller = new BlackjackController();
+		
+		blackJackView.setModel(model);
+		controller.setModel(model);
+		controller.setView(blackJackView);
+		blackJackView.setController(controller);
+		blackJackView.update(model, null);
 	}
 
 	
@@ -97,7 +115,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 
 	@Override
 	public void blackjackChosen() {
-		// TODO Auto-generated method stub
+		selectView(blackJackView);
 	}
 
 	@Override

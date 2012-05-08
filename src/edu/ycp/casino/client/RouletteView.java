@@ -26,15 +26,13 @@ import edu.ycp.casino.shared.Observer;
 import edu.ycp.casino.shared.Roulette;
 import com.google.gwt.user.client.ui.TextBoxBase;
 
-public class RouletteView extends Composite implements Observer{
+public class RouletteView extends Composite implements Observer, GameViewCallback{
 
 	private Canvas canvas;
 	private Context2d context;
 
-	
 	private GameViewCallback callback;
 	
-
 	private RouletteController controller;
 	private Roulette model; 
 	private TextBox wheelNum;
@@ -45,10 +43,7 @@ public class RouletteView extends Composite implements Observer{
 	private Button spinWheel;
 	private Image image;
  
-
 	public RouletteView() {
-
-
 
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		initWidget(absolutePanel);
@@ -219,6 +214,12 @@ public class RouletteView extends Composite implements Observer{
 		}
 
 		return b; 
+	}
+
+	@Override
+	public void chooseMainMenu() {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

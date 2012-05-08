@@ -133,16 +133,4 @@ public class Slots extends Game {
 	}
 	
 
-
-	public void play(Player p)
-	{
-
-	}
-
-	//Method to print out slot to console.
-	public void printSlot()
-	{
-		System.out.println("Slot: " + this.slot[0].toString() + " " + this.slot[1].toString() + " " + this.slot[2].toString());
-	}
-
 }
