@@ -19,56 +19,73 @@ public class Roulette extends Game {
 	private static ArrayList<Integer> red =
 			new ArrayList<Integer>(Arrays.asList(new Integer[]{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36})); 
 
-
-
-
-	private enum SlotColor {
+	//Slot color enumeration
+	public enum SlotColor {
 		RED, BLACK;
 	}
 
-	private enum Column {
+	//Column number enumeration
+	public enum Column {
 		FIRST, SECOND, THIRD, NO_COLUMN; 
 	}
 
-	
+	//Roulette constructor
 	public Roulette(){
-		wheel = new int[38]; 
+		wheel = new int[38]; 			//Construct the wheel
 		p = new Pot(); 
-		generator = new Random(); 
-		for(int i = 0; i < 37; i++){
+		generator = new Random(); 		//Create the random generator
+		for(int i = 0; i < 37; i++){	//Fill the wheel with values
 			wheel[i] =  i;
 		}
-		
-		player = new Player(); 
+
+		player = new Player(); 			//Create the player
 	}
 
-	public int getPot(){
+	//Return amount in pot
+	public int getPot(){	
 		return p.getAmount();  
 	}
-	
+
+	//Set pot value to zero
 	public void clearPot(){
 		p.takeAll(); 
 	}
+
+	//Return the player
 	public Player getPlayer(){
 		return player; 
 	}
-	
+
+	//Set the player
+	public void setPlayer(Player p){
+		player = p; 
+	}
+
+	//Generate a random value from the wheel
 	public void spinWheel(){
 		wheelVal = generator.nextInt(37);
 	}
 
+	//Return the wheel value
 	public int getWheelVal(){
 		return wheelVal; 
 	}
-	
+
+	public void setWheelVal(int val){
+		wheelVal = val; 
+	}
+
+	//Return the number bet on
 	public int getBetVal(){
 		return betNumber; 
 	}
-	
+
+	//Set the number to be bet on
 	public void setBetVal(int val){
 		betNumber = val;  
 	}
 
+	//Return the color based on the value the wheel lands on. 
 	public SlotColor getColor(int val){
 		if(red.contains(val)){
 			return SlotColor.RED; 
@@ -78,6 +95,7 @@ public class Roulette extends Game {
 		}
 	}
 
+	//Return the column based on the value the wheel lands on
 	public Column getColumn(int val){
 		Column c = null;
 
@@ -101,23 +119,24 @@ public class Roulette extends Game {
 		return c; 
 	}
 
-
+	//Return the bet type
 	public BetType getBetType(){
 		return betType; 
 	}
 
+	//Set the bet type
 	public void setBetType(BetType b){
 		betType = b; 
 	}
 
+	//Place a bet
 	public void placeBet(int amt){
-		p.add(amt);
-		player.getWallet().takeBet(amt); 
-		
+		p.add(amt);							//Add the bet to the pot
+		player.getWallet().takeBet(amt); 	//Take the bet amount from the users wallet
+
 	}
 
-
-
+	//Check if the user won based off the wheel value, bet type, and bet number
 	public Boolean checkWin(){
 		Boolean win = false;
 		SlotColor color = getColor(wheelVal);
@@ -127,11 +146,11 @@ public class Roulette extends Game {
 			win = true; 
 		}
 
-		if(betType == BetType.FIRST_HALF && betNumber < 19 && betNumber != 0){
+		if(betType == BetType.FIRST_HALF && wheelVal < 19){
 			win = true; 
 		}
 
-		if(betType == BetType.LAST_HALF && betNumber > 18){
+		if(betType == BetType.LAST_HALF && wheelVal > 18){
 			win = true; 
 		}
 
@@ -158,16 +177,13 @@ public class Roulette extends Game {
 		if(betType== BetType.FIRST_TWELVE && wheelVal < 13){
 			win = true; 
 		}
-
-		else{
-			if(betType == BetType.MIDDLE_TWELVE && wheelVal < 25){
-				win = true; 
-			}
-			else {
-				if(betType == BetType.LAST_TWELVE && wheelVal < 37){
-					win = true; 
-				}
-			}
+		
+		if(betType == BetType.MIDDLE_TWELVE && wheelVal < 25 && wheelVal > 12){
+			win = true; 
+		}
+		
+		if(betType == BetType.LAST_TWELVE && wheelVal > 24){
+			win = true; 
 		}
 
 		if(betType == BetType.ODD && wheelVal % 2 == 1){
@@ -181,6 +197,7 @@ public class Roulette extends Game {
 		return win; 
 	}
 
+	//Return the payout based off the amount bet. Each bet type has different odds that pay differently
 	public int getPayout(int bet){
 		int payout = 0; 
 
@@ -191,15 +208,15 @@ public class Roulette extends Game {
 		if(betType == BetType.BLACK || betType == BetType.RED){
 			payout = bet*2; 
 		}
-		
+
 		if(betType == BetType.ODD || betType == BetType.EVEN){
 			payout = bet*2; 
 		}
-		
+
 		if(betType == BetType.BLACK || betType == BetType.RED){
 			payout = bet*2; 
 		}
-		
+
 		if(betType == BetType.FIRST_HALF || betType == BetType.LAST_HALF){
 			payout = bet*2; 
 		}
@@ -213,77 +230,7 @@ public class Roulette extends Game {
 
 			payout = bet*3; 
 		}
-
+		
 		return payout; 
-	}
-
-
-	public void play(Player p){
-		/*int betAmount;
-		int type; 
-		int numToBet=0;
-		int wheelNum; 
-		int winnings;
-		BetType b = null;
-		Boolean gameLoop = true; 
-
-		while(gameLoop == true){
-			Scanner keyboard = new Scanner(System.in);
-			System.out.println("Please select a bet amount: ");
-			betAmount = keyboard.nextInt();
-			p.getWallet().takeBet(betAmount); 
-
-			System.out.println("Please select a bet type:");
-			System.out.println("1. Red \n2. Black \n3. First 12 \n4. Mid 12 \n5. Last 12 \n6. Number"); 
-			type = keyboard.nextInt(); 
-
-			if(type == 6){
-				System.out.println("Please enter a num to bet"); 
-				numToBet = keyboard.nextInt();
-				b = BetType.NUM_MATCH; 
-			}
-
-			if(type == 1){
-				b = BetType.RED; 
-			}
-			if(type == 2){
-				b = BetType.BLACK; 
-			}
-			if(type == 3){
-				b = BetType.FIRST_TWELVE; 
-			}
-			if(type == 4){
-				b = BetType.MIDDLE_TWELVE; 
-			}
-			if(type == 5){
-				b = BetType.LAST_TWELVE; 
-			}
-
-			placeBet(betAmount, b); 
-
-			spinWheel();
-
-			System.out.printf("The wheel landed on %d", wheelVal);
-
-			if(checkWin(b, numToBet, wheelVal) == true){
-				winnings = getPayout(betAmount, b); 
-				p.addBalance(winnings);
-
-				System.out.printf("Congrats, you won %d dollars!", winnings); 
-			}
-			else{
-				winnings = 0; 
-				System.out.printf("Sorry, you won %d dollars", winnings); 
-			}
-
-			System.out.print("Play again?: ");
-			System.out.print("1. Yes\n2. No"); 
-
-			if(keyboard.nextInt() == 2){
-				gameLoop = false; 
-			}
-		}*/
-	}
-
-	
+	}	
 }
