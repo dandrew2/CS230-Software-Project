@@ -5,6 +5,8 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 import edu.ycp.casino.shared.Slots;
 import edu.ycp.casino.shared.SlotsController;
+import edu.ycp.casino.shared.blackjack.Blackjack;
+import edu.ycp.casino.shared.blackjack.BlackjackController;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -17,7 +19,7 @@ public class Casino implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		if (SHOW_SLOTS) {
+/*		if (SHOW_SLOTS) {
 			Slots model = new Slots();
 			SlotsController controller = new SlotsController();
 			SlotsViewGWT slotsView = new SlotsViewGWT();
@@ -37,6 +39,17 @@ public class Casino implements EntryPoint {
 			RootLayoutPanel.get().add(rouletteView);
 			
 			rouletteView.drawOnCanvas();
-		}
+		} */
+		Blackjack model = new Blackjack();
+		BlackjackViewGWT view = new BlackjackViewGWT();
+		BlackjackController controller = new BlackjackController();
+		
+		view.setModel(model);
+		controller.setModel(model);
+		controller.setView(view);
+		view.setController(controller);
+		//model.play();
+		view.update(model, null);
+		RootLayoutPanel.get().add(view);
 	}
 }
