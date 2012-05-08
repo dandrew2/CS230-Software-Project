@@ -2,6 +2,7 @@ package edu.ycp.casino.client;
 
 import java.awt.geom.Ellipse2D;
 
+
 import com.google.gwt.animation.client.Animation;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
@@ -11,6 +12,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Image;
@@ -25,6 +27,9 @@ import edu.ycp.casino.shared.Observable;
 import edu.ycp.casino.shared.Observer;
 import edu.ycp.casino.shared.Roulette;
 import com.google.gwt.user.client.ui.TextBoxBase;
+import com.google.gwt.user.client.ui.SimplePanel;
+
+
 
 public class RouletteView extends Composite implements Observer{
 
@@ -38,20 +43,28 @@ public class RouletteView extends Composite implements Observer{
 	private TextBox betNumText;
 	private TextBox betTypeText;
 	private Button spinWheel;
+	private Button ok; 
 	private Image image;
- 
+	DialogBox db = new DialogBox();
+
+
 
 
 	public RouletteView() {
 
+		db.setText("You don't have that much money!");
 
 
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		initWidget(absolutePanel);
 		absolutePanel.setSize("817px", "552px");
 
+		Image image_1 = new Image("feltBg.jpg");
+		absolutePanel.add(image_1, 0, 0);
+		image_1.setSize("817px", "552px");
 
-		
+
+
 		betAmount = new TextBox();
 		absolutePanel.add(betAmount, 22, 90);
 		betAmount.setSize("107px", "18px");
@@ -91,13 +104,15 @@ public class RouletteView extends Composite implements Observer{
 		absolutePanel.add(betTypeText, 143, 310);
 		betTypeText.setSize("69px", "16px");
 
-		image = new Image("roulette.png");
+		image = new Image("board.png");
 		image.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				int x = event.getX();
 				int y = event.getY(); 
 
 				controller.betTypeHandler(getBetType(x,y));
+
+
 			}
 		});
 		absolutePanel.add(image, 256, 10);
@@ -121,16 +136,33 @@ public class RouletteView extends Composite implements Observer{
 		absolutePanel.add(walletText, 22, 166);
 		walletText.setSize("103px", "18px");
 
-		context = canvas.getContext2d();
+
+		ok = new Button("OK");
+		db.add(ok); 
+
+		ok.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) { 
+				db.hide(); 
+			}
+		});
 
 
 	}
 
 	public void runClick(){
-		controller.placeBetHandler(Integer.parseInt(betAmount.getText()));
-		betAmount.setText(""); 
-		controller.spinHandler();
-		
+		int bet = Integer.parseInt(betAmount.getText());
+		int wallet = model.getPlayer().getBalance(); 
+
+
+		if(bet > wallet){
+			db.center();  
+		}
+		else{
+			controller.placeBetHandler(bet);
+			betAmount.setText(""); 
+			controller.spinHandler();
+		}
+
 	}
 	public void setModel(Roulette model) {
 		this.model = model; 
@@ -150,14 +182,9 @@ public class RouletteView extends Composite implements Observer{
 		if(b != null){
 			betTypeText.setText(b.toString());
 		}
-		
+
 		walletText.setText("" + model.getPlayer().getBalance()); 
 
-
-	}
-	
-	
-	public void drawOnCanvas() {
 
 	}
 
@@ -203,7 +230,7 @@ public class RouletteView extends Composite implements Observer{
 				b = BetType.LAST_HALF; 
 			}
 		}
-		
+
 		if(x > 120 && x < 289){
 			if(y > 55 && y < 455){
 				b = BetType.NUM_MATCH; 
