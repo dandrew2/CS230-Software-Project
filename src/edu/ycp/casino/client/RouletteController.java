@@ -36,6 +36,10 @@ public class RouletteController {
 		bet = 0; 
 	}
 	
+	public void addMoney(int m){
+		model.getPlayer().addBalance(m); 
+		view.update(model, null); 
+	}
 	public void betTypeHandler(BetType b){
 		model.setBetType(b);
 		view.update(model, null); 
@@ -50,5 +54,10 @@ public class RouletteController {
 	
 	public Roulette getModel(){
 		return model; 
+	}
+	
+	public void setBetVal(int val){
+		model.setBetVal(val); 
+		view.update(model, null); 
 	}
 }
