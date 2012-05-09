@@ -24,9 +24,6 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 	private Slots model;
 	private SlotsController controller;
 	
-	private Label labelDisplaySlot1;
-	private Label labelDisplaySlot2;
-	private Label labelDisplaySlot3;
 	private Label lblCurrentMoneyDisplay;
 	
 	private DialogBox bustedBox;
@@ -216,6 +213,7 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 	{
 		if (callback != null) {
 			callback.chooseMainMenu();
+			System.out.print("Run main menu click");
 		}
 	}
 

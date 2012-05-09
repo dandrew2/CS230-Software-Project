@@ -13,11 +13,13 @@ import edu.ycp.casino.shared.BetType;
 import edu.ycp.casino.shared.Observable;
 import edu.ycp.casino.shared.Observer;
 import edu.ycp.casino.shared.Roulette;
+import com.google.gwt.event.dom.client.DragHandler;
+import com.google.gwt.event.dom.client.DragEvent;
 
 
 
 
-public class RouletteView extends Composite implements Observer{
+public class RouletteView extends Composite implements Observer, GameViewCallback{
 
 	private RouletteController controller;
 	private Roulette model; 
@@ -32,8 +34,10 @@ public class RouletteView extends Composite implements Observer{
 	DialogBox db = new DialogBox();
 	private Image chip;
 	private AbsolutePanel absolutePanel;
-
+	private Button btnBackToMain;
 	
+	private GameViewCallback callback;
+
 	public RouletteView() {
 		
 		//Initialize Absolute Panel
@@ -122,6 +126,16 @@ public class RouletteView extends Composite implements Observer{
 		chip = new Image("chip.png");
 		absolutePanel.add(chip, 341, 234);
 		chip.setSize("28px", "28px");
+		
+		btnBackToMain = new Button("Back to Main Menu");
+		btnBackToMain.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				System.out.print("Buttonclicked");
+				runMainMenuClick();
+			}
+		});
+		absolutePanel.add(btnBackToMain, 54, 464);
+		btnBackToMain.setSize("133px", "47px");
 
 
 		ok = new Button("OK");
@@ -136,7 +150,11 @@ public class RouletteView extends Composite implements Observer{
 
 
 	}
-
+	
+	public void setCallback(GameViewCallback callback) {
+		this.callback = callback;
+	}
+	
 	public void runClick(){
 		//If the text is not empty, parse the int
 		if(!betAmount.getText().isEmpty()){
@@ -402,6 +420,20 @@ public class RouletteView extends Composite implements Observer{
 		}
 
 		return val; 
+	}
+
+
+	public void runMainMenuClick()
+	{
+		if (callback != null) {
+			callback.chooseMainMenu();
+			System.out.print("Run main menu click");
+		}
+	}
+	
+	@Override
+	public void chooseMainMenu() {
+
 	}
 }
 

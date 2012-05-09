@@ -22,6 +22,7 @@ public class MainMenuGWT extends Composite implements Observer {
 	}
 	
 	private MainMenuEvents callback;
+	
 	private PushButton pshbtnSlots;
 	private PushButton pshbtnRoulette;
 	private PushButton pshbtnPoker;

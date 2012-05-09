@@ -3,7 +3,7 @@ package edu.ycp.casino.shared;
 import edu.ycp.casino.shared.cardgame.Hand;
 import edu.ycp.casino.shared.cardgame.HandType;
 
-public class Player extends User{
+public class Player{
 	private Wallet w; 
 	private Hand hand;
 	private int seatNum;
