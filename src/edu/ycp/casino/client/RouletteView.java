@@ -13,10 +13,6 @@ import edu.ycp.casino.shared.BetType;
 import edu.ycp.casino.shared.Observable;
 import edu.ycp.casino.shared.Observer;
 import edu.ycp.casino.shared.Roulette;
-import com.google.gwt.event.dom.client.DragHandler;
-import com.google.gwt.event.dom.client.DragEvent;
-
-
 
 
 public class RouletteView extends Composite implements Observer, GameViewCallback{

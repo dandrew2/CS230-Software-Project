@@ -10,6 +10,8 @@ import edu.ycp.casino.shared.Player;
 import edu.ycp.casino.shared.Roulette;
 import edu.ycp.casino.shared.Slots;
 import edu.ycp.casino.shared.SlotsController;
+import edu.ycp.casino.shared.blackjack.Blackjack;
+import edu.ycp.casino.shared.blackjack.BlackjackController;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -19,8 +21,10 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 
 	private MainMenuGWT mainMenu;
 	private Widget currentView;
+	
 	private SlotsViewGWT slotsView;
 	private RouletteView rouletteView;
+	private BlackjackViewGWT blackJackview;
 
 	
 	/**
@@ -35,6 +39,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		
 		initSlotsView(player);
 		initRouletteView(player);
+		initBlackJackView();
 		
 		selectView(mainMenu);
 	}
@@ -70,6 +75,18 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		rouletteView.setCallback(this);
 		
 	}
+	
+	private void initBlackJackView()
+	{
+		Blackjack model = new Blackjack();
+		blackJackview = new BlackjackViewGWT();
+		BlackjackController controller = new BlackjackController();
+		
+		blackJackview.setModel(model);
+		controller.setModel(model);
+		controller.setView(blackJackview);
+		blackJackview.setController(controller);
+	}
 
 	
 	//Method to change view currently being displayed
@@ -100,7 +117,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 
 	@Override
 	public void blackjackChosen() {
-		// TODO Auto-generated method stub
+		selectView(blackJackview);
 	}
 
 	@Override

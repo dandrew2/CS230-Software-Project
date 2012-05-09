@@ -3,7 +3,6 @@ package edu.ycp.casino.client;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.ui.InlineLabel;
 
 import edu.ycp.casino.shared.Observable;
 import edu.ycp.casino.shared.Observer;
@@ -16,7 +15,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Image;
 
