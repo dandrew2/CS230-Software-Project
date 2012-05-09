@@ -30,15 +30,14 @@ public class Roulette extends Game {
 	}
 
 	//Roulette constructor
-	public Roulette(Player player){
+	public Roulette(){
 		wheel = new int[38]; 			//Construct the wheel
 		p = new Pot(); 
 		generator = new Random(); 		//Create the random generator
 		for(int i = 0; i < 37; i++){	//Fill the wheel with values
 			wheel[i] =  i;
 		}
-
-		this.player = player;			//Create the player
+			//Create the player
 	}
 
 	//Return amount in pot
