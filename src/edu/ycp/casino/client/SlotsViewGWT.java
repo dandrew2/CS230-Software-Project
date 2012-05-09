@@ -117,8 +117,6 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 		layoutPanel.add(btnBackToMain);
 		layoutPanel.setWidgetLeftWidth(btnBackToMain, 163.0, Unit.PX, 129.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(btnBackToMain, 392.0, Unit.PX, 30.0, Unit.PX);
-		
-		
 	}
 	
 	public void setCallback(GameViewCallback callback) {

@@ -23,8 +23,17 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	private Widget currentView;
 	
 	private SlotsViewGWT slotsView;
+	private Slots slotsModel;
+	private SlotsController slotsController;
+	
+	
 	private RouletteView rouletteView;
+	private Roulette rouletteModel;
+	private RouletteController rouletteController;
+	
 	private BlackjackViewGWT blackJackview;
+	private Blackjack blackJackModel;
+	private BlackjackController blackJackController;
 
 	
 	/**
@@ -47,45 +56,45 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	
 	//Methods to set up the 4 various MVC GUI's for games
 	private void initSlotsView(Player p) {
-		Slots model = new Slots();
-		SlotsController controller = new SlotsController();
+		slotsModel = new Slots();
+		slotsController = new SlotsController();
 		slotsView = new SlotsViewGWT();
 		
-		model.setPlayer(p);
-		slotsView.setModel(model);
-		controller.setModel(model);
-		controller.setView(slotsView);
-		slotsView.setController(controller);
+		slotsModel.setPlayer(p);
+		slotsView.setModel(slotsModel);
+		slotsController.setModel(slotsModel);
+		slotsController.setView(slotsView);
+		slotsView.setController(slotsController);
 		slotsView.setCallback(this);
-		model.spin();
+		slotsModel.spin();
 		
-		slotsView.update(model, null);
+		slotsView.update(slotsModel, null);
 	}
 	
 	private void initRouletteView(Player p) {
 		rouletteView = new RouletteView();
-		Roulette model = new Roulette();			
-		RouletteController controller = new RouletteController();	
+		rouletteModel = new Roulette();			
+		rouletteController = new RouletteController();	
 		
-		model.setPlayer(p);
-		rouletteView.setModel(model); 			
-		controller.setModel(model);			
-		controller.setView(rouletteView); 			
-		rouletteView.setController(controller);
+		rouletteModel.setPlayer(p);
+		rouletteView.setModel(rouletteModel); 			
+		rouletteController.setModel(rouletteModel);			
+		rouletteController.setView(rouletteView); 			
+		rouletteView.setController(rouletteController);
 		rouletteView.setCallback(this);
 		
 	}
 	
 	private void initBlackJackView()
 	{
-		Blackjack model = new Blackjack();
+		blackJackModel = new Blackjack();
 		blackJackview = new BlackjackViewGWT();
-		BlackjackController controller = new BlackjackController();
+		blackJackController = new BlackjackController();
 		
-		blackJackview.setModel(model);
-		controller.setModel(model);
-		controller.setView(blackJackview);
-		blackJackview.setController(controller);
+		blackJackview.setModel(blackJackModel);
+		blackJackController.setModel(blackJackModel);
+		blackJackController.setView(blackJackview);
+		blackJackview.setController(blackJackController);
 	}
 
 	
@@ -103,11 +112,13 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	@Override
 	public void slotsChosen() {
 		selectView(slotsView);
+		slotsView.update(slotsModel, null);
 	}
 
 	@Override
 	public void rouletteChosen() {
 		selectView(rouletteView);
+		rouletteView.update(rouletteModel, null);
 	}
 
 	@Override

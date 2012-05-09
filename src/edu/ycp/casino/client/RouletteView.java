@@ -144,7 +144,6 @@ public class RouletteView extends Composite implements Observer, GameViewCallbac
 			}
 		});
 
-
 	}
 	
 	public void setCallback(GameViewCallback callback) {
@@ -215,7 +214,7 @@ public class RouletteView extends Composite implements Observer, GameViewCallbac
 			betTypeText.setText(b.toString());
 		}
 
-		walletText.setText("" + model.getPlayer().getBalance()); 
+		walletText.setText("" + Integer.toString(model.getPlayer().getBalance())); 
 
 		if(b == BetType.NUM_MATCH){
 			betNumText.setText("" + model.getBetVal()) ;
