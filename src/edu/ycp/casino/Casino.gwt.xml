@@ -14,7 +14,6 @@
   <!-- Other module inherits                                      -->
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='edu.ycp.casino.client.Casino'/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
