@@ -1,7 +1,7 @@
 package edu.ycp.casino.shared;
 
 public class Wallet {
-	private int balance; 
+	private int balance;
 	
 	public Wallet(){
 		this.balance = 1000; 
@@ -19,7 +19,15 @@ public class Wallet {
 		return balance;
 	}
 	
-	public void takeBet(int x){
-		balance -= x;
+	public boolean takeBet(int x){
+		if (balance>=x){
+			balance -= x;
+			return true;
+		}
+		else
+			return false;
+	}
+	public void setBalance(int x){
+		balance=x;
 	}
 }

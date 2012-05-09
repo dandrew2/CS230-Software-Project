@@ -37,8 +37,7 @@ public class Roulette extends Game {
 		for(int i = 0; i < 37; i++){	//Fill the wheel with values
 			wheel[i] =  i;
 		}
-
-		player = new Player(); 			//Create the player
+			//Create the player
 	}
 
 	//Return amount in pot

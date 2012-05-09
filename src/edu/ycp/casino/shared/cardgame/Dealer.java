@@ -6,8 +6,11 @@ import edu.ycp.casino.shared.Player;
 
 public class Dealer {
 	Deck deck;
+	int bettingRound;
+	
 	public Dealer(){
 		newDeck();
+		int bettingRound=0;
 	}
 	
 	public void newDeck(){
@@ -25,6 +28,20 @@ public class Dealer {
 		x++;
 		}
 	}
+	public void dealNext(ArrayList<Player> players,Hand tableHand){
+		System.out.println("betting Round: "+bettingRound);
+		if(bettingRound==0)
+			deal(players);
+		else if(bettingRound==1)
+			dealFlop(tableHand);
+		else if(bettingRound==2)
+			dealTurn(tableHand);
+		else if(bettingRound==3)
+			dealRiver(tableHand);
+		else
+			bettingRound=-2;
+		bettingRound++;
+	}
 	
 	public void dealFlop(Hand tableHand){
 		for(int x=0; x<3; x++){
@@ -39,4 +56,18 @@ public class Dealer {
 	public void dealRiver(Hand tableHand){
 		tableHand.addCard(this.deck.drawCard());
 	}
+
+	public int getBettingRound() {
+		return bettingRound;
+	}
+
+	public void setBettingRound(int bettingRound) {
+		this.bettingRound = bettingRound;
+	}
+	
+	//getting dealer to draw for blackjack
+	public void dealTo(Player p){
+		p.getHand().addCard(this.deck.drawCard());
+	}
+	
 }
