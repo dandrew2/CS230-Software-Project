@@ -1,7 +1,5 @@
 package edu.ycp.casino.client;
 
-import java.awt.event.MouseEvent;
-
 import edu.ycp.casino.shared.cardgame.poker.Table;
 
 public class PokerController {

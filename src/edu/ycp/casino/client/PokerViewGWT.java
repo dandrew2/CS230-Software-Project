@@ -192,6 +192,16 @@ public class PokerViewGWT extends Composite implements Observer{
 		layout.add(wallet);
 		layout.setWidgetLeftWidth(wallet, 231.0, Unit.PX, 42.0, Unit.PX);
 		layout.setWidgetTopHeight(wallet, 119.0, Unit.PX, 18.0, Unit.PX);
+		
+		Button btnBackToMain = new Button("Back to Main Menu");
+		btnBackToMain.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				runMainMenuClick();
+			}
+		});
+		layout.add(btnBackToMain);
+		layout.setWidgetLeftWidth(btnBackToMain, 318.0, Unit.PX, 81.0, Unit.PX);
+		layout.setWidgetTopHeight(btnBackToMain, 347.0, Unit.PX, 47.0, Unit.PX);
 	}
 	
 	
@@ -226,6 +236,14 @@ public class PokerViewGWT extends Composite implements Observer{
 		drawCommunity();
 		playerNum.setValue(table.getCurrentPlayerNum());
 		wallet.setValue(table.getCurrentPlayer().getWallet().getBalance());
+	}
+	
+	public void runMainMenuClick()
+	{
+		if (callback != null) {
+			callback.chooseMainMenu();
+			System.out.print("Run main menu click");
+		}
 	}
 	
 	

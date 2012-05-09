@@ -110,9 +110,10 @@ public class Table extends Game{
 	
 	public void fillEmptySeats(){
 		int emptySeats=5-this.players.size();
-		for (int x=0; x<emptySeats; x++);
+		for (int x=0; x<emptySeats; x++)
 			this.players.add(new Player());
 	}
+	
 	public int nonFoldedPlayers(){
 		int x=0;
 		for(Player player : players){

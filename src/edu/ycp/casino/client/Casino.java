@@ -53,7 +53,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		
 		initSlotsView(player);
 		initRouletteView(player);
-		initBlackJackView();
+		initBlackJackView(player);
 		initPokerView(player);
 		
 		selectView(mainMenu);
@@ -91,7 +91,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		
 	}
 	
-	private void initBlackJackView()
+	private void initBlackJackView(Player p)
 	{
 		blackJackModel = new Blackjack();
 		blackJackview = new BlackjackViewGWT();
