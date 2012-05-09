@@ -95,6 +95,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		blackJackController.setModel(blackJackModel);
 		blackJackController.setView(blackJackview);
 		blackJackview.setController(blackJackController);
+		blackJackview.setCallback(this);
 	}
 
 	
@@ -129,6 +130,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	@Override
 	public void blackjackChosen() {
 		selectView(blackJackview);
+		blackJackview.update(blackJackModel, null);
 	}
 
 	@Override

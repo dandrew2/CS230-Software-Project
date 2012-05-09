@@ -19,7 +19,7 @@ import edu.ycp.casino.shared.cardgame.Suit;
 
 import com.google.gwt.user.client.ui.Image;
 
-public class BlackjackViewGWT extends Composite implements Observer{
+public class BlackjackViewGWT extends Composite implements Observer, GameViewCallback{
 	private Blackjack model;
 	private BlackjackController controller;
 	//text box
@@ -45,6 +45,9 @@ public class BlackjackViewGWT extends Composite implements Observer{
 	private Image image_d3;
 	private Image image_d4;
 	private Image image_d5;
+	private Button btnBackButton;
+	
+	private GameViewCallback callback;
 
 	public BlackjackViewGWT() {
 
@@ -250,6 +253,17 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		resetImage(image_d3);
 		resetImage(image_d4);
 		resetImage(image_d5);
+		
+		btnBackButton = new Button("New button");
+		btnBackButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				runMainMenuClick();
+			}
+		});
+		btnBackButton.setText("Back to Main Menu");
+		layoutPanel.add(btnBackButton);
+		layoutPanel.setWidgetLeftWidth(btnBackButton, 627.0, Unit.PX, 92.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(btnBackButton, 520.0, Unit.PX, 46.0, Unit.PX);
 
 
 
@@ -475,5 +489,23 @@ public class BlackjackViewGWT extends Composite implements Observer{
 	}
 	public void setEnterBet(TextBox enterBet) {
 		this.enterBet = enterBet;
+	}
+	
+	public void setCallback(GameViewCallback callback) {
+		this.callback = callback;
+	}
+	
+	public void runMainMenuClick()
+	{
+		if (callback != null) {
+			callback.chooseMainMenu();
+			System.out.print("Run main menu click");
+		}
+	}
+	
+	@Override
+	public void chooseMainMenu() {
+		// TODO Auto-generated method stub
+		
 	}
 }
