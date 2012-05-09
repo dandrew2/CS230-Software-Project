@@ -7,7 +7,6 @@ import com.google.gwt.dom.client.Style.Unit;
 import edu.ycp.casino.shared.Observable;
 import edu.ycp.casino.shared.Observer;
 import edu.ycp.casino.shared.Slots;
-import edu.ycp.casino.shared.SlotsController;
 import edu.ycp.casino.shared.SlotsSymbols;
 
 import com.google.gwt.user.client.ui.Button;

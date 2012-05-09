@@ -1,6 +1,6 @@
-package edu.ycp.casino.shared;
+package edu.ycp.casino.client;
 
-import edu.ycp.casino.client.SlotsViewGWT;
+import edu.ycp.casino.shared.Slots;
 
 
 public class SlotsController {

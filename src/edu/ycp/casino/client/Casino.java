@@ -9,7 +9,6 @@ import edu.ycp.casino.client.MainMenuGWT.MainMenuEvents;
 import edu.ycp.casino.shared.Player;
 import edu.ycp.casino.shared.Roulette;
 import edu.ycp.casino.shared.Slots;
-import edu.ycp.casino.shared.SlotsController;
 import edu.ycp.casino.shared.blackjack.Blackjack;
 import edu.ycp.casino.shared.blackjack.BlackjackController;
 
