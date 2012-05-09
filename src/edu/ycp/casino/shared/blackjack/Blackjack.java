@@ -188,5 +188,10 @@ public class Blackjack extends Game{
 	public Player getDealer(){
 		return master;
 	}
+	
+	public void setPlayer(Player p)
+	{
+		this.player = p;
+	}
 
 }

@@ -148,6 +148,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	public void pokerChosen() {
 		selectView(pokerView);
 		pokerView.update(pokerTable, null);
+		pokerView.reDraw();
 	}
 
 	@Override
