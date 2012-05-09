@@ -24,16 +24,16 @@ import edu.ycp.casino.shared.cardgame.Suit;
 
 import com.google.gwt.user.client.ui.Image;
 
+import com.google.gwt.user.client.ui.TextBoxBase;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+
 public class BlackjackViewGWT extends Composite implements Observer{
 	private Blackjack model;
 	private BlackjackController controller;
 	//text box
 	private TextBox enterBet;
-	private TextBox handvalue;
-	private TextBox wallet;
-	private TextBox dealerValue;
-	private TextBox playstats;
-	private TextBox rewards;
+
 	//buttons 
 	private Button btnStart;
 	private Button buttonHit;
@@ -57,11 +57,15 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		initWidget(layoutPanel);
 		layoutPanel.setSize("800px", "600px");
 
+
 		Image Background = new Image("feltBg.jpg");
+
+
 		layoutPanel.add(Background);
 		Background.setSize("800", "600");
 		layoutPanel.setWidgetLeftWidth(Background, 0.0, Unit.PX, 800.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(Background, 0.0, Unit.PX, 600.0, Unit.PX);
+
 
 		TextBox txtbxEnterBet = new TextBox();
 		txtbxEnterBet.setReadOnly(true);
@@ -70,6 +74,7 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		layoutPanel.setWidgetLeftWidth(txtbxEnterBet, 11.0, Unit.PX, 92.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(txtbxEnterBet, 468.0, Unit.PX, 34.0, Unit.PX);
 
+
 		//hit button
 		buttonHit = new Button("Hit");
 		buttonHit.addClickHandler(new ClickHandler() {
@@ -77,10 +82,24 @@ public class BlackjackViewGWT extends Composite implements Observer{
 				hit();
 			}
 		});
+<<<<<<< HEAD
 		layoutPanel.add(buttonHit);
 		buttonHit.setSize("100", "45");
 		layoutPanel.setWidgetLeftWidth(buttonHit, 256.0, Unit.PX, 106.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(buttonHit, 520.0, Unit.PX, 46.0, Unit.PX);
+=======
+
+		Label txtbxEnterBet = new Label();
+
+		txtbxEnterBet.setText("Enter Bet :");
+		layoutPanel.add(txtbxEnterBet);
+		layoutPanel.setWidgetLeftWidth(txtbxEnterBet, 25.0, Unit.PX, 92.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(txtbxEnterBet, 475.0, Unit.PX, 34.0, Unit.PX);
+		layoutPanel.add(buttonHit);
+		buttonHit.setSize("100", "45");
+		layoutPanel.setWidgetLeftWidth(buttonHit, 256.0, Unit.PX, 100.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(buttonHit, 520.0, Unit.PX, 45.0, Unit.PX);
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 
 		//button stay
 		buttonStay = new Button("Stay/Endturn");
@@ -91,11 +110,18 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		});
 		layoutPanel.add(buttonStay);
 		buttonStay.setSize("100", "45");
+<<<<<<< HEAD
 		layoutPanel.setWidgetLeftWidth(buttonStay, 384.0, Unit.PX, 106.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(buttonStay, 520.0, Unit.PX, 46.0, Unit.PX);
 
 		TextBox txtbxHandValue = new TextBox();
 		txtbxHandValue.setReadOnly(true);
+=======
+		layoutPanel.setWidgetLeftWidth(buttonStay, 384.0, Unit.PX, 100.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(buttonStay, 520.0, Unit.PX, 45.0, Unit.PX);
+
+		Label txtbxHandValue = new Label();
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		txtbxHandValue.setText("Player Value :");
 		layoutPanel.add(txtbxHandValue);
 		layoutPanel.setWidgetLeftWidth(txtbxHandValue, 284.0, Unit.PX, 92.0, Unit.PX);
@@ -109,6 +135,7 @@ public class BlackjackViewGWT extends Composite implements Observer{
 			}
 		});
 		layoutPanel.add(btnStart);
+<<<<<<< HEAD
 		btnStart.setSize("120", "80");
 		layoutPanel.setWidgetLeftWidth(btnStart, 10.0, Unit.PX, 129.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(btnStart, 518.0, Unit.PX, 69.0, Unit.PX);
@@ -144,26 +171,75 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		wallet.setSize("75", "35");
 		layoutPanel.setWidgetLeftWidth(wallet, 89.0, Unit.PX, 50.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(wallet, 428.0, Unit.PX, 34.0, Unit.PX);
+=======
+		btnStart.setSize("120", "60");
+		layoutPanel.setWidgetLeftWidth(btnStart, 17.0, Unit.PX, 120.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(btnStart, 520.0, Unit.PX, 60.0, Unit.PX);
+
+		Label txtbxDealerValue = new Label();
+		txtbxDealerValue.setStyleName("gwt-DialogBox");
+		txtbxDealerValue.setText("Dealer Value :");
+		layoutPanel.add(txtbxDealerValue);
+		layoutPanel.setWidgetLeftWidth(txtbxDealerValue, 270.0, Unit.PX, 100.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(txtbxDealerValue, 14.0, Unit.PX, 34.0, Unit.PX);
+
+		//value of dealers hand
+		dealerValue = new Label();
+		dealerValue.setText("0");
+		layoutPanel.add(dealerValue);
+		dealerValue.setSize("75", "34");
+		layoutPanel.setWidgetLeftWidth(dealerValue, 355.0, Unit.PX, 75.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(dealerValue, 14.0, Unit.PX, 34.0, Unit.PX);
+
+		Label txtbxWallet = new Label();
+		txtbxWallet.setText("Wallet :");
+		layoutPanel.add(txtbxWallet);
+		layoutPanel.setWidgetLeftWidth(txtbxWallet, 45.0, Unit.PX, 92.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(txtbxWallet, 435.0, Unit.PX, 34.0, Unit.PX);
+
+		//current money left
+		wallet = new Label();
+		wallet.setStyleName("dialogVPanel");
+		wallet.setText("1000");
+		layoutPanel.add(wallet);
+		wallet.setSize("75", "35");
+		layoutPanel.setWidgetLeftWidth(wallet, 87.0, Unit.PX, 50.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(wallet, 430.0, Unit.PX, 34.0, Unit.PX);
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 
 		//input bet box
 		setEnterBet(new TextBox());
 		getEnterBet().setText("10");
 		layoutPanel.add(getEnterBet());
 		getEnterBet().setSize("75", "35");
+<<<<<<< HEAD
 		layoutPanel.setWidgetLeftWidth(getEnterBet(), 89.0, Unit.PX, 50.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(getEnterBet(), 468.0, Unit.PX, 34.0, Unit.PX);
 
 		//value of player hands
 		handvalue = new TextBox();
 		handvalue.setReadOnly(true);
+=======
+		layoutPanel.setWidgetLeftWidth(getEnterBet(), 90.0, Unit.PX, 40.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(getEnterBet(), 470.0, Unit.PX, 26.0, Unit.PX);
+
+		//value of player hands
+		handvalue = new Label();
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		layoutPanel.add(handvalue);
 		handvalue.setSize("75", "34");
 		layoutPanel.setWidgetLeftWidth(handvalue, 369.0, Unit.PX, 50.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(handvalue, 468.0, Unit.PX, 34.0, Unit.PX);
 
+<<<<<<< HEAD
 		image_c1 = new Image("Deck/black_slot.gif");
 		layoutPanel.add(image_c1);
 
+=======
+		//players card
+		image_c1 = new Image("Deck/black_slot.gif");
+		layoutPanel.add(image_c1);
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		image_c1.setSize("75", "100");
 		layoutPanel.setWidgetLeftWidth(image_c1, 240.0, Unit.PX, 71.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(image_c1, 366.0, Unit.PX, 120.0, Unit.PX);
@@ -198,6 +274,10 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		layoutPanel.setWidgetLeftWidth(image_c6, 440.0, Unit.PX, 71.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(image_c6, 366.0, Unit.PX, 96.0, Unit.PX);
 
+<<<<<<< HEAD
+=======
+		//dealers card
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		image_d1 = new Image("Deck/black_slot.gif");
 		layoutPanel.add(image_d1);
 		image_d1.setSize("75", "100");
@@ -228,14 +308,20 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		layoutPanel.setWidgetLeftWidth(image_d5, 450.0, Unit.PX, 71.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(image_d5, 54.0, Unit.PX, 96.0, Unit.PX);
 
+<<<<<<< HEAD
 		playstats = new TextBox();
 		playstats.setReadOnly(true);
+=======
+		//textbox to notify player
+		playstats = new Label();
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		playstats.setText("Enter Bet and Play");
 		layoutPanel.add(playstats);
 		layoutPanel.setWidgetLeftWidth(playstats, 273.0, Unit.PX, 173.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(playstats, 237.0, Unit.PX, 34.0, Unit.PX);
 
 		//show how much wins or losses
+<<<<<<< HEAD
 		rewards = new TextBox();
 		rewards.setReadOnly(true);
 		layoutPanel.add(rewards);
@@ -243,6 +329,14 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		layoutPanel.setWidgetTopHeight(rewards, 388.0, Unit.PX, 34.0, Unit.PX);
 		rewards.setVisible(false);
 		
+=======
+		rewards = new Label();
+		rewards.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		layoutPanel.add(rewards);
+		layoutPanel.setWidgetLeftWidth(rewards, 125.0, Unit.PX, 50.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(rewards, 428.0, Unit.PX, 35.0, Unit.PX);
+
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		//inital show of hands
 		backImage(image_c1);
 		backImage(image_c2);
@@ -256,6 +350,10 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		resetImage(image_d4);
 		resetImage(image_d5);
 
+<<<<<<< HEAD
+=======
+		enterBet.setReadOnly(false);
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 
 
 	}
@@ -264,6 +362,7 @@ public class BlackjackViewGWT extends Composite implements Observer{
 	}
 	//start button and bet
 	public void start(){
+<<<<<<< HEAD
 		controller.reset();
 		controller.assignPot(Integer.parseInt(getEnterBet().getText()));
 		controller.start();
@@ -322,6 +421,77 @@ public class BlackjackViewGWT extends Composite implements Observer{
 				stay();
 		}
 		
+=======
+		//if bet is over
+		if (controller.currentWallet(Integer.parseInt(wallet.getText()))==0){
+			playstats.setText("GameOver");
+		}
+		else if (controller.getBet()<0||controller.getBet()>controller.currentWallet(Integer.parseInt(wallet.getText()))){
+			playstats.setText("Change your bet");
+		}
+		
+		else{
+			controller.reset();
+			controller.assignPot(Integer.parseInt(getEnterBet().getText()));
+			controller.start();
+			enterBet.setReadOnly(true);
+			rewards.setVisible(false);
+			//check for tie or blackjack
+			if (model.checkBJ(model.getPlayer())==true){
+				controller.stay();
+				enterBet.setReadOnly(false);
+				if (model.checkTie(model.getPlayer(), model.getDealer())==true){
+					playstats.setText("Push!!too bad");
+					setDealerImage();
+				}
+				else {
+					playstats.setText("Blackjack!!");
+					rewards.setVisible(true);
+					rewards.setText("+"+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
+					setDealerImage();
+				}
+			}
+			else{
+				playstats.setText("Hit or Stay");
+				//reset hand
+				resetImage(image_c3);
+				resetImage(image_c4);
+				resetImage(image_c5);
+				resetImage(image_c6);
+				resetImage(image_d3);
+				resetImage(image_d4);
+				resetImage(image_d5);
+				//first two card
+				setImage(image_c1, model.getPlayer().getHand().getCard(0));
+				setImage(image_c2, model.getPlayer().getHand().getCard(1));
+				//dealer hand
+				setImage(image_d1, model.getDealer().getHand().getCard(0));
+				backImage(image_d2);
+				//dealer initial hand
+				if (model.getDealer().getHand().getCard(0).getRank()==Rank.ACE){
+					dealerValue.setText("11?");
+				}
+				else{
+					dealerValue.setText(model.getDealer().getHand().getBJCardValue(model.getDealer().getHand().getCard(0))+"?");
+				}
+			}
+		}
+
+	}
+	//hit and stay
+	public void hit(){
+		controller.hit();
+		//if bust
+		if (model.checkBust(model.getPlayer())==true){
+			controller.stay();
+			playstats.setText("You Bust!!");
+			rewards.setVisible(true);
+			rewards.setText(""+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
+			setDealerImage();
+			stay();
+			enterBet.setReadOnly(false);
+		}
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		//images for next few cards
 		if (controller.hits()==1){
 			image_c3.setVisible(true);
@@ -339,17 +509,27 @@ public class BlackjackViewGWT extends Composite implements Observer{
 			image_c6.setVisible(true);
 			setImage(image_c6, model.getPlayer().getHand().getCard(5));
 		}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		handvalue.setText(""+model.getPlayer().getHand().getBJHandValue());
 	}
 	public void stay(){
 		controller.stay();
+<<<<<<< HEAD
 		rewards.setVisible(true);
 		//check tie
+=======
+		enterBet.setReadOnly(false);
+		rewards.setVisible(true);
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		//if bust
 		if (model.checkBust(model.getPlayer())==true){
 			controller.stay();
 			playstats.setText("You Bust!!");
+<<<<<<< HEAD
 			rewards.setText("  You lose:  "+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
 			setDealerImage();
 		}
@@ -364,6 +544,25 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		else if(model.checkWin(model.getPlayer(), model.getDealer())==false){
 			playstats.setText("You Lose!!");
 			rewards.setText("  You lose:  "+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
+=======
+			rewards.setText(""+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
+			setDealerImage();
+		}
+		//check tie
+		else if (model.checkTie(model.getPlayer(), model.getDealer())==true){
+			playstats.setText("Push!!");
+			rewards.setText("+"+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
+		}
+		//check win
+		else if (model.checkWin(model.getPlayer(), model.getDealer())==true){
+			playstats.setText("You Win!!");
+			rewards.setText("+"+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
+		}
+		// if lost
+		else if(model.checkWin(model.getPlayer(), model.getDealer())==false){
+			playstats.setText("You Lose!!");
+			rewards.setText(""+model.checkOut(model.getPlayer(), model.getDealer(), controller.getBet()));
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 		}
 
 		//images for the dealers hands
@@ -378,11 +577,16 @@ public class BlackjackViewGWT extends Composite implements Observer{
 	public void setDealerImage(){
 		//images for the dealers hands
 		for (int i = 0; i < model.getDealer().getHand().getNumCards();i++){
+<<<<<<< HEAD
 			if (i == 0){
 				image_d1.setVisible(true);
 				setImage(image_d1, model.getDealer().getHand().getCard(i));
 			}
 			else if (i == 1){
+=======
+			//first card is shown already
+			if (i == 1){
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 				image_d2.setVisible(true);
 				setImage(image_d2, model.getDealer().getHand().getCard(i));
 			}
@@ -401,10 +605,15 @@ public class BlackjackViewGWT extends Composite implements Observer{
 		}
 		dealerValue.setText(""+model.getDealer().getHand().getBJHandValue());
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 	@Override
 	public void update(Observable obj, Object hint) {
 		// TODO Auto-generated method stub
 		handvalue.setText(""+model.getPlayer().getHand().getBJHandValue());
+<<<<<<< HEAD
 		//dealerValue.setText(""+model.getDealer().getHand().getBJHandValue());
 		//update wallet
 		wallet.setText(""+controller.currentWallet(Integer.parseInt(wallet.getText())));
@@ -412,6 +621,15 @@ public class BlackjackViewGWT extends Composite implements Observer{
 	public void resetImage(Image image){
 		image.setVisible(false);
 		//image.setUrl("Deck/black_slot.gif");
+=======
+		//update wallet
+		wallet.setText(""+controller.currentWallet(Integer.parseInt(wallet.getText())));
+	}
+
+	//hid images
+	public void resetImage(Image image){
+		image.setVisible(false);
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 	}
 	//back of card
 	public void backImage(Image image){
@@ -480,5 +698,9 @@ public class BlackjackViewGWT extends Composite implements Observer{
 	}
 	public void setEnterBet(TextBox enterBet) {
 		this.enterBet = enterBet;
+<<<<<<< HEAD
+=======
+		enterBet.setMaxLength(3);
+>>>>>>> fa039c1ece54a73817808a04851bfce5a85e9213
 	}
 }

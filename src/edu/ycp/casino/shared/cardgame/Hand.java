@@ -65,7 +65,6 @@ public class Hand implements Comparable<Hand>{
     }
     
     public void shuffle() {
-        //    Collections.shuffle(this.cards);
             //Collections.shuffle(this.cards);
             shuffleCard(this.cards);
     }
