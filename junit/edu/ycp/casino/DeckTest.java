@@ -29,7 +29,6 @@ public class DeckTest {
 	}
 	
 	
-	
 	@Test
 	public void testGetNumOfCards()
 	{
@@ -60,8 +59,18 @@ public class DeckTest {
 	public void testDrawCard()
 	{
 		Card cardToTest;
-		
 		cardToTest = deck1.drawCard();
+		assertEquals(deck1.getNumCards(),51);
+		assertEquals(cardToTest.getRank(),Rank.KING);
+		assertEquals(cardToTest.getSuit(),Suit.SPADES);	
+	}
+	
+	@Test
+	public void testShuffle()
+	{
+		assertEquals(deck1.getCard(10).getRank(),deck2.getCard(10).getRank());
+		deck1.shuffle();
+		assertNotSame(deck1.getCard(10),deck2.getCard(10));
 	}
 	
 	

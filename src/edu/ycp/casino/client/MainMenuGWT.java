@@ -40,11 +40,11 @@ public class MainMenuGWT extends Composite implements Observer {
 		
 		//Everything involved for the Slots Button
 		pshbtnSlots = new PushButton("Slots");
-		Image imageDown = new Image("mainMenuImages/mainMenuButtons/pressed/slotsPressed.png");
+		Image imageDown = new Image("casinoImages/mainMenuButtons/pressed/slotsPressed.png");
 		pshbtnSlots.getDownFace().setImage(imageDown);
-		imageDown.setSize("579px", "126px");
+		imageDown.setSize("535px", "81px");
 		Image image = new Image("casinoImages/mainMenuButtons/default/slots.png");
-		image.setSize("541px", "80px");
+		image.setSize("535px", "81px");
 		pshbtnSlots.getUpFace().setImage(image);
 		pshbtnSlots.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -59,11 +59,11 @@ public class MainMenuGWT extends Composite implements Observer {
 		
 		//Everything involved for the Roulette Button
 		pshbtnRoulette = new PushButton("Roulette");
-		Image image_1Down = new Image("mainMenuImages/mainMenuButtons/pressed/roulettePressed.png");
+		Image image_1Down = new Image("casinoImages/mainMenuButtons/pressed/roulettePressed.png");
 		pshbtnRoulette.getDownFace().setImage(image_1Down);
-		image_1Down.setSize("581px", "128px");
-		Image image_1 = new Image("mainMenuImages/mainMenuButtons/default/roulette.png");
-		image_1.setSize("540px", "82px");
+		image_1Down.setSize("535px", "81px");
+		Image image_1 = new Image("casinoImages/mainMenuButtons/default/roulette.png");
+		image_1.setSize("535px", "81px");
 		pshbtnRoulette.getUpFace().setImage(image_1);
 		pshbtnRoulette.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -77,12 +77,12 @@ public class MainMenuGWT extends Composite implements Observer {
 		
 		//Everything involved for the Poker Button
 		pshbtnPoker = new PushButton("Poker");
-		Image image_2 = new Image("mainMenuImages/mainMenuButtons/default/poker.png");
-		image_2.setSize("535px", "82px");
+		Image image_2 = new Image("casinoImages/mainMenuButtons/default/poker.png");
+		image_2.setSize("535px", "81px");
 		pshbtnPoker.getUpFace().setImage(image_2);
-		Image image2Down = new Image("mainMenuImages/mainMenuButtons/pressed/pokerPressed.png");
+		Image image2Down = new Image("casinoImages/mainMenuButtons/pressed/pokerPressed.png");
 		pshbtnPoker.getDownFace().setImage(image2Down);
-		image2Down.setSize("578px", "126px");
+		image2Down.setSize("535px", "81px");
 		pshbtnPoker.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				runPokerClick();
@@ -95,11 +95,11 @@ public class MainMenuGWT extends Composite implements Observer {
 		
 		//Everything involved for the Black Jack Button
 		pshbtnBlackJack = new PushButton("Black Jack");
-		Image image3Down = new Image("mainMenuImages/mainMenuButtons/pressed/blackJackPressed.png");
+		Image image3Down = new Image("casinoImages/mainMenuButtons/pressed/blackJackPressed.png");
 		pshbtnBlackJack.getDownFace().setImage(image3Down);
-		image3Down.setSize("577px", "125px");
-		Image image_3 = new Image("mainMenuImages/mainMenuButtons/default/blackJack.png");
-		image_3.setSize("540px", "84px");
+		image3Down.setSize("535px", "81px");
+		Image image_3 = new Image("casinoImages/mainMenuButtons/default/blackJack.png");
+		image_3.setSize("535px", "81px");
 		pshbtnBlackJack.getUpFace().setImage(image_3);
 		pshbtnBlackJack.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
