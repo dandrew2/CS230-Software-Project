@@ -37,6 +37,7 @@ public class Deck {
 		//Collections.shuffle(this.cards);
 		shuffleCard(this.cards);
 	}
+	
 	//swap method for shuffle
 	public void shuffleswap(List<Card>cards, int x, int y){
 		Card temp = cards.get(x);

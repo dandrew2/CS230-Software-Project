@@ -46,10 +46,6 @@ public class Player{
 	public void setHand(Hand hand) {
 		this.hand = hand;
 	}
-	public int getBet() {
-		// TODO impliment a UI bet getter
-		return 5;
-	}
 	public int getAnti(int anti) {
 		w.takeBet(anti); 
 		return anti;
@@ -75,11 +71,14 @@ public class Player{
 	public int getHoldingBet(){
 		return holdingBet;
 	}
-	public int takeHoldingBet(int minBet){
-		int temp=holdingBet;
-		w.takeBet(holdingBet);
-		holdingBet=minBet;
-		return temp;
+	
+	public boolean takeHoldingBet(){
+		return w.takeBet(holdingBet);
+	}
+	
+	public int getBet() {
+		// TODO impliment a UI bet getter
+		return 5;
 	}
 
 	public HandType getHandType() {
@@ -93,9 +92,11 @@ public class Player{
 	public boolean isFolded() {
 		return folded;
 	}
-
-	public void setFolded(boolean folded) {
-		this.folded = folded;
+	public void fold() {
+		this.folded = true;
+	}
+	public void unfold(){
+		this.folded = false;
 	}
 	
 }

@@ -71,7 +71,7 @@ public class SlotsTest {
 		game1 = new Slots();
 		game1.setSlot(slot1);
 		game1.spin();
-		
+		assertNotSame(slot1[1],game1.getSlot()[1]);
 	}
 
 	@Test

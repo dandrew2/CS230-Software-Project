@@ -50,15 +50,30 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 		
 		bustedBox = new DialogBox();
 		layoutPanel.add(bustedBox);
-		layoutPanel.setWidgetLeftWidth(bustedBox, 19.0, Unit.PX, 157.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(bustedBox, 39.0, Unit.PX, 65.0, Unit.PX);
+		layoutPanel.setWidgetLeftWidth(bustedBox, 236.0, Unit.PX, 157.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(bustedBox, 260.0, Unit.PX, 65.0, Unit.PX);
 		bustedBox.setVisible(false);
 		bustedBox.setText("You have gone broke.");
+		
+		Button btnOk = new Button("OK");
+		btnOk.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				bustedBox.setVisible(false);
+			}
+		});
+		bustedBox.setWidget(btnOk);
+		btnOk.setSize("100%", "100%");
 		
 		btnSpin = new Button("Spin");
 		btnSpin.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				runClick();
+				if(model.getPlayer().getBalance() > 0)
+				{
+					runClick();
+				}else
+				{
+					bustedBox.setVisible(true);
+				}
 			}
 		});
 		layoutPanel.add(btnSpin);
@@ -132,7 +147,6 @@ public class SlotsViewGWT extends Composite implements Observer, GameViewCallbac
 		if(model.getPlayer().getWallet().getBalance()<=0 )
 		{
 			bustedBox.setVisible(true);
-			bustedBox.center();
 		}
 		
 		lblCurrentMoneyDisplay.setText(Integer.toString(model.getPlayer().getWallet().getBalance()));

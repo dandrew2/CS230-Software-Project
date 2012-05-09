@@ -19,12 +19,15 @@ public class Wallet {
 		return balance;
 	}
 	
-	public void setBalance(int b)
-	{
-		this.balance = b;
+	public boolean takeBet(int x){
+		if (balance>=x){
+			balance -= x;
+			return true;
+		}
+		else
+			return false;
 	}
-	
-	public void takeBet(int x){
-		balance -= x;
+	public void setBalance(int x){
+		balance=x;
 	}
 }

@@ -1,5 +1,7 @@
 package edu.ycp.casino.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -11,6 +13,7 @@ import edu.ycp.casino.shared.Roulette;
 import edu.ycp.casino.shared.Slots;
 import edu.ycp.casino.shared.blackjack.Blackjack;
 import edu.ycp.casino.shared.blackjack.BlackjackController;
+import edu.ycp.casino.shared.cardgame.poker.Table;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -25,7 +28,6 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	private Slots slotsModel;
 	private SlotsController slotsController;
 	
-	
 	private RouletteView rouletteView;
 	private Roulette rouletteModel;
 	private RouletteController rouletteController;
@@ -33,6 +35,10 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 	private BlackjackViewGWT blackJackview;
 	private Blackjack blackJackModel;
 	private BlackjackController blackJackController;
+	
+	private PokerViewGWT pokerView;
+	private Table pokerTable;
+	private PokerController pokerController;
 
 	
 	/**
@@ -48,6 +54,7 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		initSlotsView(player);
 		initRouletteView(player);
 		initBlackJackView();
+		initPokerView(player);
 		
 		selectView(mainMenu);
 	}
@@ -96,6 +103,22 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 		blackJackview.setController(blackJackController);
 		blackJackview.setCallback(this);
 	}
+	
+	private void initPokerView(Player p)
+	{
+		
+		ArrayList<Player> players=new ArrayList<Player>();
+		players.add(p);
+		pokerTable = new Table(players);
+		pokerView= new PokerViewGWT(pokerTable);
+		pokerController = new PokerController(pokerTable,pokerView);
+		
+		
+		pokerView.setController(pokerController);
+		pokerView.setCallback(this);
+		
+		pokerView.update(pokerTable, null);
+	}
 
 	
 	//Method to change view currently being displayed
@@ -123,7 +146,8 @@ public class Casino implements EntryPoint, MainMenuEvents, GameViewCallback {
 
 	@Override
 	public void pokerChosen() {
-		// TODO Auto-generated method stub	
+		selectView(pokerView);
+		pokerView.update(pokerTable, null);
 	}
 
 	@Override

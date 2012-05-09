@@ -20,10 +20,19 @@ public class HandComperator {
 		//find best hand
 		Hand bestHand=getBestHand(playerHands);
 		//Tell the player what they have
-		players.get(bestHand.getOwner()).setHandType(bestHand.parseHandType());
-		return players.get(bestHand.getOwner());
+		Player winner=getPlayerFromSeat(players,bestHand.getOwner());
+		winner.setHandType(bestHand.parseHandType());
+		return winner;
 	}
 	
+	private Player getPlayerFromSeat(ArrayList<Player> players,int seatNum){
+		for(Player player : players){
+			System.out.println("Winner's seat: "+seatNum+".  Player's: "+player.getSeatNum());
+			if(player.getSeatNum() == seatNum)
+				return player;
+		}
+		return null;
+	}
 	private Hand makePossibleHand(ArrayList<Card> community,Player player,int pos1,int pos2){
 		//Set up the possible hand.
 		Hand hand=new Hand(community,player.getSeatNum());
@@ -41,6 +50,7 @@ public class HandComperator {
 	
 	//Find all combinations of the community cards and the player's hand.
 	private Hand getBestPossible(Hand community,Player player){
+		System.out.println(player.getSeatNum());
 		//This will be replaced with better possibilities and returned at the end.
 		Hand bestHand = new Hand(community.getCards());
 		//Try all possible positions of the first card in player's hand.

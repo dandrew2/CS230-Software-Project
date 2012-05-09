@@ -3,13 +3,23 @@ package edu.ycp.casino.shared.cardgame.poker;
 public class Pot {
 	int amount;
 	int minBet;
+	int maxBet;
 	
 	public Pot(){
 		amount=0;
 	}
-	public void add(int given){
-		this.amount+=given;
-		this.minBet=given;
+	public boolean add(int given){
+		if(given>=this.minBet){
+			if((this.maxBet==0) || (given<=this.maxBet)){
+				this.amount+=given;
+				this.minBet=given;
+				return true;
+			}
+			else
+				return false;
+		}
+		else
+			return false;
 	}
 	public int takeAll(){
 		int temp=this.amount;
@@ -25,7 +35,16 @@ public class Pot {
 	public void setMinBet(int minBet) {
 		this.minBet = minBet;
 	}
-	public void resetMinBet(int anti) {
-		this.minBet = anti;
+	public void resetMinBet() {
+		this.minBet = 0;
+	}
+	public int getMaxBet() {
+		return maxBet;
+	}
+	public void setMaxBet(int maxBet) {
+		this.maxBet = maxBet;
+	}
+	public void resetMaxBet() {
+		this.maxBet = 0;
 	}
 }

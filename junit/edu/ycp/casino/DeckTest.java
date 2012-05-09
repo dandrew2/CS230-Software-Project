@@ -73,5 +73,21 @@ public class DeckTest {
 		assertNotSame(deck1.getCard(10),deck2.getCard(10));
 	}
 	
+	@Test
+	public void testShuffleSwap()
+	{
+		Card cardOne = deck1.getCard(10);
+		Card cardTwo = deck1.getCard(15);
+	
+		assertNotSame(deck1.getCard(10),deck2.getCard(10));
+	}
+	
+	@Test
+	public void testShuffleCard()
+	{
+		assertEquals(deck1.getCard(10).getRank(),deck2.getCard(10).getRank());
+		deck1.shuffle();
+		assertNotSame(deck1.getCard(10),deck2.getCard(10));
+	}
 	
 }

@@ -27,7 +27,7 @@ public class RouletteView extends Composite implements Observer, GameViewCallbac
 	private Button spinWheel;
 	private Button ok; 
 	private Image board;
-	DialogBox db = new DialogBox();
+	private DialogBox db = new DialogBox();
 	private Image chip;
 	private AbsolutePanel absolutePanel;
 	private Button btnBackToMain;

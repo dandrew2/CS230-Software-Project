@@ -2,11 +2,12 @@ package edu.ycp.casino.shared.cardgame.poker;
 
 import java.util.ArrayList;
 
+import edu.ycp.casino.shared.Game;
 import edu.ycp.casino.shared.Player;
 import edu.ycp.casino.shared.cardgame.Dealer;
 import edu.ycp.casino.shared.cardgame.Hand;
 
-public class Table {
+public class Table extends Game{
 	
 	private final int ANTI=5;
 	private HandComperator comperator;
@@ -14,7 +15,7 @@ public class Table {
 	private Dealer dealer;
 	private Hand community;
 	private Pot pot;
-	private int currentPlayer=0;
+	private int currentPlayer=-1;
 	
 	private ArrayList<Player> makePlayers(int numPlayers){
 		ArrayList<Player> players=new ArrayList<Player>();
@@ -57,7 +58,8 @@ public class Table {
 	
 	public void takeBets(){
 		for (Player player : players){
-			pot.add(player.takeHoldingBet(pot.getMinBet()));
+			if(player.takeHoldingBet())
+				pot.add(player.getHoldingBet());
 		}
 	}
 	
@@ -66,9 +68,11 @@ public class Table {
 			currentPlayer++;
 		else{
 			currentPlayer=0;
-			pot.resetMinBet(ANTI);
+			pot.resetMinBet();
 			dealer.dealNext(players,community);
 		}
+		if(players.get(currentPlayer).isFolded())
+			iterateCurrentPlayer();
 	}
 	
 	public void takeAnti(){
@@ -104,8 +108,27 @@ public class Table {
 		return (dealer.getBettingRound()==-1);
 	}
 	
+	public void fillEmptySeats(){
+		int emptySeats=5-this.players.size();
+		for (int x=0; x<emptySeats; x++);
+			this.players.add(new Player());
+	}
+	public int nonFoldedPlayers(){
+		int x=0;
+		for(Player player : players){
+			if(!player.isFolded()){
+				x++;
+			}
+		}
+		return x;
+	}
+	
 	public Player getWinner(){
-		return this.comperator.getWinner(this.community,this.players);
+		ArrayList<Player> playersIn=new ArrayList<Player>();
+		for(Player player : players)
+			if(!player.isFolded())
+				playersIn.add(player);
+		return this.comperator.getWinner(this.community,playersIn);
 	}
 	
 	public Dealer getDealer() {
